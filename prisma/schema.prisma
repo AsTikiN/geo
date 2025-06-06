@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Pit {
+  id        Int      @id @default(autoincrement())
+  year      Int
+  month     Int
+  street    String
+  files     PitFile[]
+  createdAt DateTime @default(now())
+
+  @@unique([year, month, street])
+}
+
+model PitFile {
+  id        Int      @id @default(autoincrement())
+  pit       Pit      @relation(fields: [pitId], references: [id])
+  pitId     Int
+  filename  String
+  filepath  String
+  filetype  String
+  createdAt DateTime @default(now())
+
+  @@unique([filepath])
+}
