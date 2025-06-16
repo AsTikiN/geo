@@ -8,9 +8,26 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "electron-dev": "concurrently \"yarn dev\" \"electron .\"",
-    "electron-build": "next build && electron-builder",
-    "electron-start": "electron ."
+    "electron-dev": "concurrently \"next dev\" \"electron .\"",
+    "electron-prod": "next build && electron .",
+    "electron-build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.geo-app",
+    "productName": "Geo App",
+    "files": [
+      "main.js",
+      "server.js",
+      ".next/**/*",
+      "node_modules/**/*",
+      "prisma/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    }
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.8",
@@ -20,6 +37,7 @@
     "@types/google.maps": "^3.58.1",
     "@types/lodash": "^4.17.17",
     "@types/uuid": "^10.0.0",
+    "concurrently": "^9.1.2",
     "docx-preview": "^0.3.5",
     "lodash": "^4.17.21",
     "mammoth": "^1.9.1",
@@ -41,28 +59,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "electron": "^36.4.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71",
-  "build": {
-    "appId": "com.geo-app",
-    "productName": "Geo App",
-    "files": [
-      ".next/**/*",
-      "node_modules/**/*",
-      "main.js"
-    ],
-    "win": {
-      "target": "nsis"
-    },
-    "mac": {
-      "target": "dmg"
-    },
-    "linux": {
-      "target": "AppImage"
-    }
-  }
+  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
 }
+
+
