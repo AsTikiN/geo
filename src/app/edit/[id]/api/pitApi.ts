@@ -1,5 +1,3 @@
-import { FormInputs } from "../types";
-
 export const pitApi = {
   getPit: async (id: string) => {
     const response = await fetch(`/api/get-pit/${id}`);
@@ -15,11 +13,12 @@ export const pitApi = {
       body: formData,
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || "Failed to edit pit");
+      throw new Error(data.error || "Failed to edit pit");
     }
 
-    return response.json();
+    return data;
   },
 };

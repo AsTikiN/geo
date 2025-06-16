@@ -1,0 +1,10 @@
+# Prisma generated files
+src/generated/**/*
+**/prisma/runtime/**/*
+**/wasm-*.js
+node_modules/**/*
+
+# Ignore all generated files
+*.generated.*
+*.generated.js
+*.generated.ts 

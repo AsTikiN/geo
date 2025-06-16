@@ -2,13 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model Pit {
@@ -17,6 +18,7 @@ model Pit {
   month     Int
   street    String
   files     PitFile[]
+  jobNumber String? @unique @default(uuid())
   createdAt DateTime @default(now())
 
   @@unique([year, month, street])

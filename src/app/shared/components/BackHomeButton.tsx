@@ -5,7 +5,7 @@ export const BackHomeButton = () => {
 
   return (
     <button
-      onClick={() => router.push("/")}
+      onClick={() => router.push("/documents")}
       className="mb-8 flex cursor-pointer items-center text-[#1D1D1F] hover:text-[#0066CC] transition-colors"
     >
       <svg

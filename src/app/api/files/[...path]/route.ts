@@ -3,12 +3,14 @@ import { join } from "path";
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { path: string[] } }
-) {
+interface Props {
+  params: Promise<{ path: string[] }>;
+}
+
+export async function GET(request: Request, props: Props) {
   try {
-    const filePath = join(process.cwd(), "src", "storage", ...params.path);
+    const { path } = await props.params;
+    const filePath = join(process.cwd(), "src", "storage", ...path);
 
     if (!existsSync(filePath)) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });

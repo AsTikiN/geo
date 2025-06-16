@@ -1,13 +1,14 @@
 "use client";
 
+import { Pit } from "@/app/preview/[id]/types";
 import Link from "next/link";
-import { Pit } from "@/types";
 
 interface TableProps {
   pits: Pit[];
+  hasPdfFile: (files: { filetype: string }[]) => boolean;
 }
 
-export function Table({ pits }: TableProps) {
+export function Table({ pits, hasPdfFile }: TableProps) {
   return (
     <div className="bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] overflow-hidden">
       <div className="overflow-x-auto">
@@ -21,7 +22,7 @@ export function Table({ pits }: TableProps) {
                 Месяц
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
-                Улица
+                Адрес
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
                 Файлы
@@ -42,11 +43,20 @@ export function Table({ pits }: TableProps) {
               >
                 <td className="px-8 py-6 text-sm text-gray-900">{pit.year}</td>
                 <td className="px-8 py-6 text-sm text-gray-900">{pit.month}</td>
-                <td className="px-8 py-6 text-sm text-gray-900 font-medium">
-                  {pit.street}
+                <td className="px-8 py-6">
+                  <div className="text-sm text-gray-900 font-medium">
+                    {pit.street.split("_")[0]} {pit.street.split("_")[1]}
+                  </div>
+                  <div className="text-xs text-gray-500">№{pit.jobNumber}</div>
                 </td>
                 <td className="px-8 py-6">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <span
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      hasPdfFile(pit.files)
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-red-100 text-red-800"
+                    }`}
+                  >
                     {pit.files.length}
                   </span>
                 </td>
@@ -57,7 +67,7 @@ export function Table({ pits }: TableProps) {
                     year: "numeric",
                   })}
                 </td>
-                <td className="px-8 py-6 space-x-2">
+                <td className="px-8 py-6 space-x-2 flex gap-2 flex-wrap">
                   <Link
                     href={`/preview/${pit.id}`}
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"

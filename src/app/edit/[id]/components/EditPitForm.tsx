@@ -1,17 +1,24 @@
-import { Control, useWatch } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+  useWatch,
+} from "react-hook-form";
 import Select from "react-select";
-import { FormInputs, SelectOption } from "../types";
 import { customSelectStyles } from "../../../add/components/selectStyles";
+import { FormInputs, SelectOption } from "../types/index";
 
 interface EditPitFormProps {
-  register: any;
+  register: UseFormRegister<FormInputs>;
   control: Control<FormInputs>;
-  errors: any;
-  setValue: (name: keyof FormInputs, value: any) => void;
+  errors: FieldErrors<FormInputs>;
+  setValue: UseFormSetValue<FormInputs>;
   yearOptions: SelectOption[];
   monthOptions: SelectOption[];
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isSubmitting: boolean;
+  onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const EditPitForm = ({
@@ -23,6 +30,7 @@ export const EditPitForm = ({
   monthOptions,
   onSubmit,
   isSubmitting,
+  onFileChange,
 }: EditPitFormProps) => {
   const year = useWatch({ control, name: "year" });
   const month = useWatch({ control, name: "month" });
@@ -107,10 +115,13 @@ export const EditPitForm = ({
             multiple
             className="w-full px-6 py-4 text-base bg-[#F5F7FA] border-2 border-dashed border-[#86868B] rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#0071E3] file:text-white hover:file:bg-[#0077ED]"
             {...register("files")}
+            onChange={onFileChange}
           />
         </div>
         {errors.files && (
-          <span className="text-[#FF3B30] text-sm">{errors.files.message}</span>
+          <span className="text-[#FF3B30] text-sm">
+            {errors.files.message as string}
+          </span>
         )}
       </div>
 

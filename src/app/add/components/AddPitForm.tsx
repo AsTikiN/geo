@@ -1,20 +1,8 @@
-import { Control } from "react-hook-form";
 import Select from "react-select";
-import { FormInputs, SelectOption } from "../types";
 import { customSelectStyles } from "./selectStyles";
+import { AddPitFormProps } from "../types";
 
-interface AddPitFormProps {
-  register: any;
-  control: Control<FormInputs>;
-  errors: any;
-  setValue: (name: keyof FormInputs, value: any) => void;
-  yearOptions: SelectOption[];
-  monthOptions: SelectOption[];
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isSubmitting: boolean;
-}
-
-export const AddPitForm = ({
+export function AddPitForm({
   register,
   control,
   errors,
@@ -23,7 +11,8 @@ export const AddPitForm = ({
   monthOptions,
   onSubmit,
   isSubmitting,
-}: AddPitFormProps) => {
+  onFileChange,
+}: AddPitFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-8">
       <div className="space-y-3">
@@ -68,7 +57,7 @@ export const AddPitForm = ({
           type="text"
           placeholder="Название города"
           className="w-full px-6 py-4 text-base text-[#1D1D1F] bg-[#F5F7FA] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors placeholder:text-[#1D1D1F]/60"
-          {...register("city")}
+          {...register("city", { required: "Введите город" })}
         />
         {errors.city && (
           <span className="text-[#FF3B30] text-sm">{errors.city.message}</span>
@@ -83,7 +72,7 @@ export const AddPitForm = ({
           type="text"
           placeholder="Название улицы"
           className="w-full px-6 py-4 text-base text-[#1D1D1F] bg-[#F5F7FA] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors placeholder:text-[#1D1D1F]/60"
-          {...register("street")}
+          {...register("street", { required: "Введите улицу" })}
         />
         {errors.street && (
           <span className="text-[#FF3B30] text-sm">
@@ -102,10 +91,13 @@ export const AddPitForm = ({
             multiple
             className="w-full px-6 py-4 text-base text-[#1D1D1F] bg-[#F5F7FA] border-2 border-dashed border-[#86868B] rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-[#0071E3] file:text-white hover:file:bg-[#0077ED]"
             {...register("files")}
+            onChange={onFileChange}
           />
         </div>
         {errors.files && (
-          <span className="text-[#FF3B30] text-sm">{errors.files.message}</span>
+          <span className="text-[#FF3B30] text-sm">
+            {errors.files.message as string}
+          </span>
         )}
       </div>
 
@@ -144,4 +136,4 @@ export const AddPitForm = ({
       </button>
     </form>
   );
-};
+}

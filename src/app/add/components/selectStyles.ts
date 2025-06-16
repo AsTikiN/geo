@@ -1,5 +1,5 @@
 export const customSelectStyles = {
-  control: (base: any, state: any) => ({
+  control: (base: Record<string, unknown>, state: { isFocused: boolean }) => ({
     ...base,
     padding: "0.5rem",
     backgroundColor: "#F5F7FA",
@@ -11,7 +11,10 @@ export const customSelectStyles = {
       borderColor: "#0071E3",
     },
   }),
-  option: (base: any, state: any) => ({
+  option: (
+    base: Record<string, unknown>,
+    state: { isSelected: boolean; isFocused: boolean }
+  ) => ({
     ...base,
     backgroundColor: state.isSelected
       ? "#0071E3"
@@ -21,7 +24,7 @@ export const customSelectStyles = {
     color: state.isSelected ? "white" : "#1D1D1F",
     padding: "0.75rem 1rem",
   }),
-  menu: (base: any) => ({
+  menu: (base: Record<string, unknown>) => ({
     ...base,
     borderRadius: "1rem",
     overflow: "hidden",

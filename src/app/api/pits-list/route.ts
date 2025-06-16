@@ -24,6 +24,13 @@ export async function GET(request: Request) {
           },
         ].filter(Boolean),
       }),
+      ...(searchParams.get("noPdf") === "true" && {
+        files: {
+          none: {
+            filetype: "pdf",
+          },
+        },
+      }),
     };
     console.log("Where clause:", JSON.stringify(where, null, 2));
 
@@ -51,6 +58,7 @@ export async function GET(request: Request) {
         month: true,
         street: true,
         createdAt: true,
+        jobNumber: true,
         files: {
           select: {
             id: true,
@@ -65,12 +73,13 @@ export async function GET(request: Request) {
     console.log("Query successful, found", pits.length, "pits");
 
     return NextResponse.json(pits);
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorObject = error as Error;
     console.error("Error details:", {
-      name: error?.name || "Unknown error",
-      message: error?.message || "No error message",
-      stack: error?.stack,
-      cause: error?.cause,
+      name: errorObject.name || "Unknown error",
+      message: errorObject.message || "No error message",
+      stack: errorObject.stack,
+      cause: errorObject.cause,
     });
 
     // Log the full error object
@@ -79,8 +88,8 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         error: "Failed to fetch pits",
-        details: error?.message || "Unknown error occurred",
-        type: error?.name || "UnknownError",
+        details: errorObject.message || "Unknown error occurred",
+        type: errorObject.name || "UnknownError",
       },
       { status: 500 }
     );

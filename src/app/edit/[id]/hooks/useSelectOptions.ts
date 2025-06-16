@@ -1,4 +1,4 @@
-import { SelectOption } from "../types";
+import { SelectOption } from "../types/index";
 
 export const useSelectOptions = () => {
   const yearOptions: SelectOption[] = Array.from({ length: 100 }, (_, i) => ({

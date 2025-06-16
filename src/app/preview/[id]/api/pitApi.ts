@@ -1,4 +1,4 @@
-import { Pit } from "../types";
+import { Pit } from "../types/index";
 
 export const pitApi = {
   getPit: async (id: string): Promise<Pit> => {
@@ -8,4 +8,4 @@ export const pitApi = {
     }
     return response.json();
   },
-}; 
+};

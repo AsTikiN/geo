@@ -55,7 +55,17 @@ export function Filters() {
     } else {
       params.delete(key);
     }
-    router.push(`/?${params.toString()}`);
+    router.replace(`/documents?${params.toString()}`, { scroll: false });
+  };
+
+  const handleCheckboxChange = (checked: boolean) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (checked) {
+      params.set("noPdf", "true");
+    } else {
+      params.delete("noPdf");
+    }
+    router.replace(`/documents?${params.toString()}`, { scroll: false });
   };
 
   const debouncedSearch = useCallback(
@@ -66,13 +76,13 @@ export function Filters() {
       } else {
         params.delete("search");
       }
-      router.push(`/?${params.toString()}`);
+      router.replace(`/documents?${params.toString()}`, { scroll: false });
     }, 300),
     [searchParams, router]
   );
 
   const customStyles = {
-    control: (base: any) => ({
+    control: (base: Record<string, unknown>) => ({
       ...base,
       minHeight: "42px",
       borderRadius: "0.5rem",
@@ -81,7 +91,10 @@ export function Filters() {
         borderColor: "#E5E7EB",
       },
     }),
-    option: (base: any, state: { isSelected: boolean }) => ({
+    option: (
+      base: Record<string, unknown>,
+      state: { isSelected: boolean }
+    ) => ({
       ...base,
       backgroundColor: state.isSelected ? "#0071E3" : "white",
       color: state.isSelected ? "white" : "#1F2937",
@@ -89,15 +102,15 @@ export function Filters() {
         backgroundColor: state.isSelected ? "#0071E3" : "#F3F4F6",
       },
     }),
-    placeholder: (base: any) => ({
+    placeholder: (base: Record<string, unknown>) => ({
       ...base,
       color: "#6B7280",
     }),
   };
 
   return (
-    <div className="space-y-4 mb-8">
-      <div className="flex gap-4">
+    <div className="mb-8">
+      <div className="flex gap-4 items-center flex-wrap">
         <div className="w-48">
           <ClientSelect
             options={yearOptions}
@@ -148,19 +161,45 @@ export function Filters() {
             isClearable
           />
         </div>
-      </div>
 
-      <div className="w-full relative">
-        <input
-          type="text"
-          placeholder="Поиск по году, месяцу, улице..."
-          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500 text-base"
-          value={searchValue}
-          onChange={(e) => {
-            setSearchValue(e.target.value);
-            debouncedSearch(e.target.value);
-          }}
-        />
+        <div className="w-96 relative">
+          <input
+            type="text"
+            placeholder="Поиск по году, месяцу, улице..."
+            className="w-full h-[42px] pl-10 pr-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500 text-base"
+            value={searchValue}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+              debouncedSearch(e.target.value);
+            }}
+          />
+          <svg
+            className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
+
+        <div className="flex items-center">
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              checked={searchParams.get("noPdf") === "true"}
+              onChange={(e) => handleCheckboxChange(e.target.checked)}
+            />
+            <span className="text-sm text-gray-700">Без PDF</span>
+          </label>
+        </div>
       </div>
     </div>
   );

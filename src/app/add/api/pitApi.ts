@@ -1,4 +1,4 @@
-import { FormInputs } from "../types";
+import { FormInputs } from "../types/index";
 
 export const pitApi = {
   addPit: async (formData: FormData) => {

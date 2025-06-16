@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { FormInputs, addPitSchema } from "../types";
+import { FormInputs, addPitSchema } from "../types/index";
 import { pitApi } from "../api/pitApi";
 import { toast } from "react-toastify";
 
@@ -29,7 +29,7 @@ export const useAddPitForm = () => {
   const mutation = useMutation({
     mutationFn: (formData: FormData) => pitApi.addPit(formData),
     onSuccess: () => {
-      router.push("/");
+      router.push("/documents");
       queryClient.invalidateQueries({ queryKey: ["pits"] });
       toast.success("Площадка успешно добавлена");
       // router.refresh();
