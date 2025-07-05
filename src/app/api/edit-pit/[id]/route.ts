@@ -27,18 +27,18 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     if (!pit) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "Styczeń",
+      "Luty",
+      "Marzec",
+      "Kwiecień",
+      "Maj",
+      "Czerwiec",
+      "Lipiec",
+      "Sierpień",
+      "Wrzesień",
+      "Październik",
+      "Listopad",
+      "Grudzień",
     ];
 
     // Construct paths with _Geotechnika suffix

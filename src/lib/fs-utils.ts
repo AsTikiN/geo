@@ -5,18 +5,18 @@ const STORAGE_PATH = path.join(process.cwd(), "src", "storage");
 
 export function getMonthName(month: number): string {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Styczeń",
+    "Luty",
+    "Marzec",
+    "Kwiecień",
+    "Maj",
+    "Czerwiec",
+    "Lipiec",
+    "Sierpień",
+    "Wrzesień",
+    "Październik",
+    "Listopad",
+    "Grudzień",
   ];
   return months[month - 1] || "";
 }
@@ -68,18 +68,18 @@ export function parseMeta(filePath: string) {
 
 function getMonthNumber(monthName: string): number {
   const months = {
-    January: 1,
-    February: 2,
-    March: 3,
-    April: 4,
-    May: 5,
-    June: 6,
-    July: 7,
-    August: 8,
-    September: 9,
-    October: 10,
-    November: 11,
-    December: 12,
+    Styczeń: 1,
+    Luty: 2,
+    Marzec: 3,
+    Kwiecień: 4,
+    Maj: 5,
+    Czerwiec: 6,
+    Lipiec: 7,
+    Sierpień: 8,
+    Wrzesień: 9,
+    Październik: 10,
+    Listopad: 11,
+    Grudzień: 12,
   };
   return months[monthName as keyof typeof months] || 1;
 }

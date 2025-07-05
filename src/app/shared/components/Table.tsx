@@ -47,7 +47,6 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                   <div className="text-sm text-gray-900 font-medium">
                     {pit.street.split("_")[0]} {pit.street.split("_")[1]}
                   </div>
-                  <div className="text-xs text-gray-500">№{pit.jobNumber}</div>
                 </td>
                 <td className="px-8 py-6">
                   <span
