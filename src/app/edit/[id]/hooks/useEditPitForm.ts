@@ -17,12 +17,14 @@ export const useEditPitForm = (id: string) => {
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => pitApi.editPit(id, formData),
-    onSuccess: () => {
-      router.push("/documents");
-      queryClient.invalidateQueries({ queryKey: ["pits"] });
+    onSuccess: (data) => {
+      console.log("Mutation successful:", data);
       toast.success("Площадка успешно обновлена");
+      queryClient.invalidateQueries({ queryKey: ["pits"] });
+      router.push("/documents");
     },
     onError: (error: Error) => {
+      console.error("Mutation error:", error);
       toast.error(error.message || "Ошибка при обновлении площадки");
     },
   });

@@ -33,6 +33,7 @@ export default function AddPitPage() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      console.log("Add pit form submitted with data:", data);
       const formData = new FormData();
       formData.append("year", data.year);
       formData.append("month", data.month);
@@ -44,6 +45,7 @@ export default function AddPitPage() {
         formData.append("files", file.file);
       });
 
+      console.log("Calling add pit mutation with formData");
       await mutation.mutateAsync(formData);
     } catch (error) {
       console.error("Error submitting form:", error);

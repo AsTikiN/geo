@@ -28,11 +28,15 @@ export const useAddPitForm = () => {
 
   const mutation = useMutation({
     mutationFn: (formData: FormData) => pitApi.addPit(formData),
-    onSuccess: () => {
-      router.push("/documents");
-      queryClient.invalidateQueries({ queryKey: ["pits"] });
+    onSuccess: (data) => {
+      console.log("Add pit mutation successful:", data);
       toast.success("Площадка успешно добавлена");
-      // router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["pits"] });
+      router.push("/documents");
+    },
+    onError: (error: Error) => {
+      console.error("Add pit mutation error:", error);
+      toast.error(error.message || "Ошибка при добавлении площадки");
     },
   });
 

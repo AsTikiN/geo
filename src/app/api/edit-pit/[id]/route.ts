@@ -129,6 +129,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         const buffer = Buffer.from(await file.arrayBuffer());
         const filename = file.name;
         const filepath = path.join(newPath, filename);
+        const filetype = path.extname(file.name).slice(1);
 
         await writeFile(filepath, buffer);
 
@@ -137,7 +138,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
           data: {
             filename,
             filepath: path.relative(getStoragePath(), filepath),
-            filetype: file.type || "application/octet-stream",
+            filetype,
             pitId: id,
           },
         });

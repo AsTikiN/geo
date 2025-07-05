@@ -63,6 +63,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
   };
 
   const onSubmit = handleSubmit((data) => {
+    console.log("Form submitted with data:", data);
     const formData = new FormData();
     formData.append("year", data.year);
     formData.append("month", data.month);
@@ -83,6 +84,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
       }
     });
 
+    console.log("Calling mutation with formData");
     mutation.mutate(formData);
   });
 
