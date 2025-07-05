@@ -51,7 +51,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
   useEffect(() => {
     const initMap = async () => {
       const loader = new Loader({
-        apiKey: "AIzaSyBpFBe9xQa9BlrfC0tVgLlVib1VfNPjZYA",
+        apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
         version: "weekly",
         libraries: ["geocoding"],
       });
