@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "electron-dev": "concurrently \"next dev\" \"electron .\"",
-    "electron-prod": "next build && electron .",
+    "electron-prod": "electron .",
     "electron-build": "electron-builder"
   },
   "build": {
