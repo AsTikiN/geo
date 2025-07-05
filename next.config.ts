@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
         "**/C:/Users/**/AppData",
         "**/C:/Users/**/Local",
         "**/C:/Users/**/Roaming",
+        "**/C:/Users/**/Application Data",
         "**/C:/Windows",
         "**/C:/Program Files",
         "**/C:/Program Files (x86)",
