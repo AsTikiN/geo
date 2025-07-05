@@ -29,7 +29,7 @@ export default function PreviewPitPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-red-600">
-            {error instanceof Error ? error.message : "An error occurred"}
+            {error instanceof Error ? error.message : "Wystąpił błąd"}
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function PreviewPitPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-screen">
-          <div className="text-gray-600">No pit data found</div>
+          <div className="text-gray-600">Nie znaleziono danych</div>
         </div>
       </div>
     );
@@ -68,7 +68,7 @@ export default function PreviewPitPage() {
           </svg>
         </Link>
         <h1 className="text-2xl font-medium text-blue-900 ml-4">
-          Информация о дорожных работах
+          Informacje o robotach drogowych
         </h1>
       </div>
 
@@ -78,26 +78,26 @@ export default function PreviewPitPage() {
           <div className="space-y-8">
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <h3 className="text-sm font-medium text-[#86868B] mb-2">Год</h3>
+                <h3 className="text-sm font-medium text-[#86868B] mb-2">Rok</h3>
                 <p className="text-lg text-[#1D1D1F]">{pit.year}</p>
               </div>
               <div>
                 <h3 className="text-sm font-medium text-[#86868B] mb-2">
-                  Месяц
+                  Miesiąc
                 </h3>
                 <p className="text-lg text-[#1D1D1F]">{pit.month}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-[#86868B] mb-2">Улица</h3>
+              <h3 className="text-sm font-medium text-[#86868B] mb-2">Ulica</h3>
               <p className="text-lg text-[#1D1D1F]">{pit.street}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-8">
               <div>
                 <h3 className="text-sm font-medium text-[#86868B] mb-2">
-                  Дата создания
+                  Data utworzenia
                 </h3>
                 <p className="text-lg text-[#1D1D1F]">
                   {new Date(pit.createdAt).toLocaleDateString()}
@@ -107,7 +107,7 @@ export default function PreviewPitPage() {
 
             <div>
               <h3 className="text-sm font-medium text-[#86868B] mb-4">
-                Прикрепленные файлы
+                Załączone pliki
               </h3>
               <FilesTable
                 files={pit.files}
@@ -138,7 +138,7 @@ export default function PreviewPitPage() {
           ) : (
             <div className="h-full flex items-center justify-center">
               <p className="text-[#86868B] text-center">
-                Выберите файл для просмотра
+                Wybierz plik do podglądu
               </p>
             </div>
           )}
@@ -149,7 +149,7 @@ export default function PreviewPitPage() {
           <div className="bg-white rounded-2xl shadow-[0_10px_20px_rgba(0,113,227,0.15)] p-8">
             <div className="mb-6">
               <h3 className="text-lg font-medium text-[#1D1D1F]">
-                Расположение
+                Lokalizacja
               </h3>
               <p className="text-sm text-[#86868B] mt-1">{pit.street}</p>
             </div>

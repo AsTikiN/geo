@@ -39,12 +39,12 @@ export const EditPitForm = ({
     <form onSubmit={onSubmit} className="space-y-8">
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
-          Год
+          Rok
         </label>
         <Select
           options={yearOptions}
           styles={customSelectStyles}
-          placeholder="Выберите год"
+          placeholder="Wybierz rok"
           onChange={(option) => setValue("year", option?.value || "")}
           value={yearOptions.find((option) => option.value === year)}
           className="react-select-container"
@@ -57,12 +57,12 @@ export const EditPitForm = ({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
-          Месяц
+          Miesiąc
         </label>
         <Select
           options={monthOptions}
           styles={customSelectStyles}
-          placeholder="Выберите месяц"
+          placeholder="Wybierz miesiąc"
           onChange={(option) => setValue("month", option?.value || "")}
           value={monthOptions.find((option) => option.value === month)}
           className="react-select-container"
@@ -75,11 +75,11 @@ export const EditPitForm = ({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
-          Город
+          Miasto
         </label>
         <input
           type="text"
-          placeholder="Название города"
+          placeholder="Nazwa miasta"
           className="w-full px-6 py-4 text-base bg-[#FAFBFC] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors text-[#1D1D1F]"
           {...register("city")}
         />
@@ -90,11 +90,11 @@ export const EditPitForm = ({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
-          Улица
+          Ulica
         </label>
         <input
           type="text"
-          placeholder="Название улицы"
+          placeholder="Nazwa ulicy"
           className="w-full px-6 py-4 text-base bg-[#FAFBFC] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors text-[#1D1D1F]"
           {...register("street")}
         />
@@ -107,7 +107,7 @@ export const EditPitForm = ({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
-          Документы (опционально)
+          Dokumenty (opcjonalnie)
         </label>
         <div className="relative">
           <input
@@ -152,10 +152,10 @@ export const EditPitForm = ({
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            Сохранение...
+            Zapisywanie...
           </span>
         ) : (
-          "Сохранить изменения"
+          "Zapisz zmiany"
         )}
       </button>
     </form>

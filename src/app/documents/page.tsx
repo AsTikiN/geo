@@ -18,11 +18,11 @@ function DocumentsContent() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["pits"] });
-      toast.success("Файловая система успешно синхронизирована");
+      toast.success("System plików został pomyślnie zsynchronizowany");
     },
     onError: (error) => {
       console.error("Error syncing filesystem:", error);
-      toast.error("Ошибка при синхронизации файловой системы");
+      toast.error("Błąd podczas synchronizacji systemu plików");
     },
   });
 
@@ -30,8 +30,10 @@ function DocumentsContent() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-medium text-blue-900 mr-4">Документы</h1>
-          <p className="text-gray-500">Управление документами дорожных работ</p>
+          <h1 className="text-4xl font-medium text-blue-900 mr-4">Dokumenty</h1>
+          <p className="text-gray-500">
+            Zarządzanie dokumentami robót drogowych
+          </p>
         </div>
 
         <div className="flex items-center gap-4">
@@ -62,7 +64,7 @@ function DocumentsContent() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Синхронизация...
+                Synchronizacja...
               </>
             ) : (
               <>
@@ -80,7 +82,7 @@ function DocumentsContent() {
                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                   />
                 </svg>
-                Синхронизировать
+                Synchronizuj
               </>
             )}
           </button>
@@ -103,12 +105,12 @@ function DocumentsContent() {
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               />
             </svg>
-            Добавить запись
+            Dodaj wpis
           </Link>
         </div>
       </div>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Ładowanie...</div>}>
         <PitList />
       </Suspense>
     </div>

@@ -16,10 +16,10 @@ export function FilesTable({
   const formatFileType = (type: string) => {
     const fileType = type.toLowerCase();
 
-    // Common file type mappings
+    // Mapowanie typów plików
     const typeMap: Record<string, string> = {
       "vnd.openxmlformats-officedocument.spreadsheetml.sheet": "xlsx",
-      "vnd.ms-excel": "xls",
+      "vnd.ms-excel": "xls", 
       "vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
       msword: "doc",
       "vnd.openxmlformats-officedocument.presentationml.presentation": "pptx",
@@ -36,16 +36,16 @@ export function FilesTable({
       "7z": "7z",
     };
 
-    // Try to find a match in the typeMap
+    // Próba znalezienia dopasowania w typeMap
     for (const [key, value] of Object.entries(typeMap)) {
       if (fileType.includes(key)) {
         return value.toUpperCase();
       }
     }
 
-    // If no match found, return the last part of the type or "Unknown"
+    // Jeśli nie znaleziono dopasowania, zwróć ostatnią część typu lub "Nieznany"
     const lastPart = type.split("/").pop()?.split(".").pop();
-    return lastPart ? lastPart.toUpperCase() : "Unknown";
+    return lastPart ? lastPart.toUpperCase() : "Nieznany";
   };
 
   const getFileIcon = (type: string) => {
@@ -106,7 +106,7 @@ export function FilesTable({
   if (files.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
-        Нет загруженных файлов
+        Brak przesłanych plików
       </div>
     );
   }
@@ -114,13 +114,13 @@ export function FilesTable({
   return (
     <div className="overflow-x-auto">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-medium text-gray-900">Загруженные файлы</h3>
+        <h3 className="text-lg font-medium text-gray-900">Przesłane pliki</h3>
         {onClearFiles && (
           <button
             onClick={onClearFiles}
             className="text-sm text-red-600 hover:text-red-800"
           >
-            Очистить все
+            Wyczyść wszystko
           </button>
         )}
       </div>
@@ -128,10 +128,10 @@ export function FilesTable({
         <thead>
           <tr className="border-b border-gray-200">
             <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">
-              Файл
+              Plik
             </th>
             <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">
-              Формат
+              Format
             </th>
           </tr>
         </thead>

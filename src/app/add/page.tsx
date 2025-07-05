@@ -77,7 +77,7 @@ export default function AddPitPage() {
           </Link>
           <div>
             <h1 className="text-4xl font-medium text-blue-900 mb-2">
-              Новая запись
+              Nowy wpis
             </h1>
           </div>
         </div>

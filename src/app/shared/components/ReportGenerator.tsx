@@ -24,18 +24,18 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
   }));
 
   const monthOptions: SelectOption[] = [
-    { value: "1", label: "Январь" },
-    { value: "2", label: "Февраль" },
-    { value: "3", label: "Март" },
-    { value: "4", label: "Апрель" },
-    { value: "5", label: "Май" },
-    { value: "6", label: "Июнь" },
-    { value: "7", label: "Июль" },
-    { value: "8", label: "Август" },
-    { value: "9", label: "Сентябрь" },
-    { value: "10", label: "Октябрь" },
-    { value: "11", label: "Ноябрь" },
-    { value: "12", label: "Декабрь" },
+    { value: "1", label: "Styczeń" },
+    { value: "2", label: "Luty" },
+    { value: "3", label: "Marzec" },
+    { value: "4", label: "Kwiecień" },
+    { value: "5", label: "Maj" },
+    { value: "6", label: "Czerwiec" },
+    { value: "7", label: "Lipiec" },
+    { value: "8", label: "Sierpień" },
+    { value: "9", label: "Wrzesień" },
+    { value: "10", label: "Październik" },
+    { value: "11", label: "Listopad" },
+    { value: "12", label: "Grudzień" },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,7 +45,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
       await onGenerate(filters);
     } catch (error) {
       console.error("Error generating report:", error);
-      alert("Ошибка при генерации отчета");
+      alert("Błąd podczas generowania raportu");
     } finally {
       setIsLoading(false);
     }
@@ -54,13 +54,13 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
   return (
     <div className="bg-white rounded-2xl shadow-[0_10px_20px_rgba(0,113,227,0.15)] p-8">
       <h2 className="text-2xl font-medium text-blue-900 mb-6">
-        Генерация отчета
+        Generowanie raportu
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Год
+              Rok
             </label>
             <Select
               options={yearOptions}
@@ -74,13 +74,13 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 })
               }
               isClearable
-              placeholder="Выберите год"
+              placeholder="Wybierz rok"
               styles={customSelectStyles}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Месяц
+              Miesiąc
             </label>
             <Select
               options={monthOptions}
@@ -94,13 +94,13 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 })
               }
               isClearable
-              placeholder="Выберите месяц"
+              placeholder="Wybierz miesiąc"
               styles={customSelectStyles}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Город
+              Miasto
             </label>
             <input
               type="text"
@@ -109,12 +109,12 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 setFilters({ ...filters, city: e.target.value || undefined })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400"
-              placeholder="Введите город"
+              placeholder="Wprowadź miasto"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Улица
+              Ulica
             </label>
             <input
               type="text"
@@ -123,7 +123,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 setFilters({ ...filters, street: e.target.value || undefined })
               }
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400"
-              placeholder="Введите улицу"
+              placeholder="Wprowadź ulicę"
             />
           </div>
         </div>
@@ -138,7 +138,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 setFilters({ ...filters, noPdf: e.target.checked })
               }
             />
-            <span className="text-sm text-gray-700">Только записи без PDF</span>
+            <span className="text-sm text-gray-700">Tylko wpisy bez PDF</span>
           </label>
         </div>
 
@@ -170,10 +170,10 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Генерация...
+                Generowanie...
               </span>
             ) : (
-              "Сгенерировать отчет"
+              "Wygeneruj raport"
             )}
           </button>
         </div>

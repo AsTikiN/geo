@@ -63,28 +63,28 @@ export default function EditPitPage({ id }: EditPitPageProps) {
   };
 
   const onSubmit = handleSubmit((data) => {
-    console.log("Form submitted with data:", data);
+    console.log("Formularz wysłany z danymi:", data);
     const formData = new FormData();
     formData.append("year", data.year);
     formData.append("month", data.month);
     formData.append("city", data.city);
     formData.append("street", data.street);
 
-    // Only append new files
+    // Dodaj tylko nowe pliki
     if (data.files) {
       Array.from(data.files).forEach((file) => {
         formData.append("files", file as Blob);
       });
     }
 
-    // Add existing file IDs to be kept
+    // Dodaj ID istniejących plików do zachowania
     existingFiles.forEach((file) => {
       if (file.id) {
         formData.append("existingFiles", file.id);
       }
     });
 
-    console.log("Calling mutation with formData");
+    console.log("Wywołanie mutacji z formData");
     mutation.mutate(formData);
   });
 
@@ -99,7 +99,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
   if (mutation.isError) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-600">Error: {mutation.error.message}</div>
+        <div className="text-red-600">Błąd: {mutation.error.message}</div>
       </div>
     );
   }
@@ -107,7 +107,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
   if (!pit) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-gray-600">Pit not found</div>
+        <div className="text-gray-600">Nie znaleziono wpisu</div>
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
           </svg>
         </Link>
         <h1 className="text-2xl font-medium text-blue-900 ml-4">
-          Редактирование записи
+          Edycja wpisu
         </h1>
       </div>
 

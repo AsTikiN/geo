@@ -17,13 +17,13 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="flex">
-        {/* Sidebar */}
+        {/* Pasek boczny */}
         <div className="w-72 min-h-screen bg-white shadow-[0_10px_20px_rgba(0,113,227,0.15)] p-8">
           <div className="mb-12">
             <h1 className="text-3xl font-medium text-blue-900 mb-2">
-              Геотехника
+              Geotechnika
             </h1>
-            <p className="text-gray-500">Управление документами</p>
+            <p className="text-gray-500">Zarządzanie dokumentami</p>
           </div>
 
           <nav className="space-y-3">
@@ -49,7 +49,7 @@ export function Layout({ children }: LayoutProps) {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              Документы
+              Dokumenty
             </Link>
 
             <Link
@@ -74,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
                   d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              Отчеты
+              Raporty
             </Link>
 
             <Link
@@ -99,18 +99,18 @@ export function Layout({ children }: LayoutProps) {
                   d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
                 />
               </svg>
-              Карта
+              Mapa
             </Link>
           </nav>
         </div>
 
-        {/* Main content */}
+        {/* Główna treść */}
         <div className="flex-1 p-12">
           <div className="mx-auto">{children}</div>
         </div>
       </div>
 
-      {/* Toast Container */}
+      {/* Kontener powiadomień */}
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -46,8 +46,8 @@ function ReportsContent() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-4xl font-medium text-blue-900 mb-2">Отчеты</h1>
-        <p className="text-gray-500">Генерация отчетов по дорожным работам</p>
+        <h1 className="text-4xl font-medium text-blue-900 mb-2">Raporty</h1>
+        <p className="text-gray-500">Generowanie raportów z robót drogowych</p>
       </div>
 
       <ReportGenerator onGenerate={handleGenerateReport} />

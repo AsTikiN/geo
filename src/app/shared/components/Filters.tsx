@@ -7,31 +7,31 @@ import { ClientSelect } from "./ClientSelect";
 import { useQueryClient } from "@tanstack/react-query";
 
 const monthOptions = [
-  { value: "", label: "Все месяцы" },
-  { value: "1", label: "Январь" },
-  { value: "2", label: "Февраль" },
-  { value: "3", label: "Март" },
-  { value: "4", label: "Апрель" },
-  { value: "5", label: "Май" },
-  { value: "6", label: "Июнь" },
-  { value: "7", label: "Июль" },
-  { value: "8", label: "Август" },
-  { value: "9", label: "Сентябрь" },
-  { value: "10", label: "Октябрь" },
-  { value: "11", label: "Ноябрь" },
-  { value: "12", label: "Декабрь" },
+  { value: "", label: "Wszystkie miesiące" },
+  { value: "1", label: "Styczeń" },
+  { value: "2", label: "Luty" },
+  { value: "3", label: "Marzec" },
+  { value: "4", label: "Kwiecień" },
+  { value: "5", label: "Maj" },
+  { value: "6", label: "Czerwiec" },
+  { value: "7", label: "Lipiec" },
+  { value: "8", label: "Sierpień" },
+  { value: "9", label: "Wrzesień" },
+  { value: "10", label: "Październik" },
+  { value: "11", label: "Listopad" },
+  { value: "12", label: "Grudzień" },
 ];
 
 const sortOptions = [
-  { value: "", label: "Сортировка" },
-  { value: "date_desc", label: "Сначала новые" },
-  { value: "date_asc", label: "Сначала старые" },
-  { value: "street_asc", label: "По улице (А-Я)" },
-  { value: "street_desc", label: "По улице (Я-А)" },
+  { value: "", label: "Sortowanie" },
+  { value: "date_desc", label: "Najpierw nowe" },
+  { value: "date_asc", label: "Najpierw stare" },
+  { value: "street_asc", label: "Po ulicy (A-Ż)" },
+  { value: "street_desc", label: "Po ulicy (Ż-A)" },
 ];
 
 const yearOptions = [
-  { value: "", label: "Все годы" },
+  { value: "", label: "Wszystkie lata" },
   ...Array.from({ length: 100 }, (_, i) => {
     const year = 2000 + i;
     return { value: year.toString(), label: year.toString() };
@@ -123,7 +123,7 @@ export function Filters() {
               handleFilterChange("year", option?.value || "")
             }
             styles={customStyles}
-            placeholder="Год"
+            placeholder="Rok"
             isClearable
           />
         </div>
@@ -140,7 +140,7 @@ export function Filters() {
               handleFilterChange("month", option?.value || "")
             }
             styles={customStyles}
-            placeholder="Месяц"
+            placeholder="Miesiąc"
             isClearable
           />
         </div>
@@ -157,7 +157,7 @@ export function Filters() {
               handleFilterChange("sort", option?.value || "")
             }
             styles={customStyles}
-            placeholder="Сортировка"
+            placeholder="Sortowanie"
             isClearable
           />
         </div>
@@ -165,7 +165,7 @@ export function Filters() {
         <div className="w-96 relative">
           <input
             type="text"
-            placeholder="Поиск по году, месяцу, улице..."
+            placeholder="Szukaj po roku, miesiącu, ulicy..."
             className="w-full h-[42px] pl-10 pr-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder-gray-500 text-base"
             value={searchValue}
             onChange={(e) => {
@@ -197,7 +197,7 @@ export function Filters() {
               checked={searchParams.get("noPdf") === "true"}
               onChange={(e) => handleCheckboxChange(e.target.checked)}
             />
-            <span className="text-sm text-gray-700">Без PDF</span>
+            <span className="text-sm text-gray-700">Bez PDF</span>
           </label>
         </div>
       </div>

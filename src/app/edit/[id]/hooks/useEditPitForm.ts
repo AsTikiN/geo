@@ -18,14 +18,14 @@ export const useEditPitForm = (id: string) => {
   const mutation = useMutation({
     mutationFn: (formData: FormData) => pitApi.editPit(id, formData),
     onSuccess: (data) => {
-      console.log("Mutation successful:", data);
-      toast.success("Площадка успешно обновлена");
+      console.log("Mutacja zakończona sukcesem:", data);
+      toast.success("Wpis został pomyślnie zaktualizowany");
       queryClient.invalidateQueries({ queryKey: ["pits"] });
       router.push("/documents");
     },
     onError: (error: Error) => {
-      console.error("Mutation error:", error);
-      toast.error(error.message || "Ошибка при обновлении площадки");
+      console.error("Błąd mutacji:", error);
+      toast.error(error.message || "Błąd podczas aktualizacji wpisu");
     },
   });
 

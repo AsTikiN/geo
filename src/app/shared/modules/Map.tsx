@@ -66,7 +66,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
             geocoder.geocode(
               {
                 address: pit.street,
-                region: "ru",
+                region: "pl",
               },
               (
                 results: GeocoderResult[] | null,
@@ -85,7 +85,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
         const locations = await Promise.all(
           geocodePromises.map((p) =>
             p.catch((e) => {
-              console.error("Geocode was not successful:", e);
+              console.error("Geokodowanie nie powiodło się:", e);
               return null;
             })
           )
@@ -105,7 +105,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
 
           mapInstanceRef.current = map;
 
-          // Add custom fullscreen control
+          // Dodaj niestandardowy przycisk pełnego ekranu
           const fullscreenButton = document.createElement("button");
           fullscreenButton.className =
             "absolute top-4 right-4 z-10 p-2 bg-white rounded-lg shadow-md hover:bg-gray-50 transition-colors";
@@ -114,7 +114,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
             </svg>
           `;
-          fullscreenButton.title = "На весь экран";
+          fullscreenButton.title = "Pełny ekran";
           map.controls[google.maps.ControlPosition.TOP_RIGHT].push(
             fullscreenButton
           );
@@ -130,7 +130,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
             }
           });
 
-          // Update button icon when fullscreen state changes
+          // Aktualizuj ikonę przycisku po zmianie stanu pełnego ekranu
           document.addEventListener("fullscreenchange", () => {
             if (document.fullscreenElement) {
               fullscreenButton.innerHTML = `
@@ -171,7 +171,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
               animation: google.maps.Animation.DROP,
             });
 
-            // Store the pit ID in the marker object
+            // Zapisz ID punktu w obiekcie markera
             (marker as unknown as { pitId: number }).pitId = result.id;
 
             if (showPopup) {
@@ -182,7 +182,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
                       <h3 class="text-lg font-semibold text-[#1D1D1F] mb-1">${
                         result.street
                       }</h3>
-                      <div class="text-sm text-[#86868B]">№${
+                      <div class="text-sm text-[#86868B]">Nr ${
                         result.jobNumber
                       }</div>
                     </div>
@@ -203,7 +203,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
                         <div class="text-[#1D1D1F] font-medium">${
                           result.year
                         }, ${result.month}</div>
-                        <div class="text-[#86868B] text-xs">Период</div>
+                        <div class="text-[#86868B] text-xs">Okres</div>
                       </div>
                     </div>
                     <div class="flex items-center text-sm">
@@ -215,8 +215,8 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
                       <div>
                         <div class="text-[#1D1D1F] font-medium">${
                           result.files.length
-                        } файлов</div>
-                        <div class="text-[#86868B] text-xs">Документы</div>
+                        } plików</div>
+                        <div class="text-[#86868B] text-xs">Dokumenty</div>
                       </div>
                     </div>
                     <div class="flex items-center text-sm">
@@ -228,8 +228,8 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
                       <div>
                         <div class="text-[#1D1D1F] font-medium">${new Date(
                           result.createdAt
-                        ).toLocaleDateString("ru-RU")}</div>
-                        <div class="text-[#86868B] text-xs">Дата создания</div>
+                        ).toLocaleDateString("pl-PL")}</div>
+                        <div class="text-[#86868B] text-xs">Data utworzenia</div>
                       </div>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                       </svg>
-                      Просмотреть детали
+                      Zobacz szczegóły
                     </a>
                   </div>
                 </div>
@@ -278,7 +278,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
           }
         }
       } catch (error) {
-        console.error("Error loading Google Maps:", error);
+        console.error("Błąd podczas ładowania Google Maps:", error);
       }
     };
 

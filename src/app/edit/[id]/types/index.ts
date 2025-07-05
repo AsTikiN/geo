@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const editPitSchema = z.object({
-  year: z.string().min(1, "Выберите год"),
-  month: z.string().min(1, "Выберите месяц"),
-  city: z.string().min(1, "Введите название города"),
-  street: z.string().min(1, "Введите название улицы"),
+  year: z.string().min(1, "Wybierz rok"),
+  month: z.string().min(1, "Wybierz miesiąc"),
+  city: z.string().min(1, "Wprowadź nazwę miasta"),
+  street: z.string().min(1, "Wprowadź nazwę ulicy"),
   files: z.any().optional(),
 });
 

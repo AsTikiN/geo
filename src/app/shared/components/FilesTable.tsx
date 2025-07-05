@@ -104,25 +104,25 @@ export function FilesTable({ files, existingFiles = [] }: FilesTableProps) {
   return (
     <div>
       <h3 className="text-lg font-medium text-gray-900 mb-4">
-        Прикрепленные файлы
+        Załączone pliki
       </h3>
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr className="bg-gray-50">
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Название
+                Nazwa
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Тип
+                Typ
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {files.map((file) => {
               // Handle both existing files (filename/filetype) and new files (name/type)
-              const fileName = file.filename || file.name || "Unknown file";
-              const fileType = file.filetype || file.type || "Unknown";
+              const fileName = file.filename || file.name || "Nieznany plik";
+              const fileType = file.filetype || file.type || "Nieznany";
               const isExisting = isExistingFile(file);
 
               return (
@@ -144,7 +144,7 @@ export function FilesTable({ files, existingFiles = [] }: FilesTableProps) {
                         <div className="text-sm text-gray-500">
                           {new Date(
                             file.createdAt || Date.now()
-                          ).toLocaleDateString("ru-RU")}
+                          ).toLocaleDateString("pl-PL")}
                         </div>
                       </div>
                     </div>

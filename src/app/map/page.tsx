@@ -61,7 +61,7 @@ function MapContent() {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6">
           <div className="text-center py-8">
-            <p className="text-gray-500">Нет данных для отображения</p>
+            <p className="text-gray-500">Brak danych do wyświetlenia</p>
           </div>
         </div>
       </div>
@@ -93,10 +93,10 @@ function MapContent() {
           </Link>
           <div>
             <h1 className="text-4xl font-medium text-blue-900 mb-2">
-              Карта дорожных работ
+              Mapa robót drogowych
             </h1>
             <p className="text-gray-500">
-              Просмотр всех мест проведения дорожных работ
+              Przeglądanie wszystkich miejsc prowadzenia robót drogowych
             </p>
           </div>
         </div>
@@ -108,8 +108,8 @@ function MapContent() {
         </div>
         <div className="col-span-4 bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6  ">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-medium text-gray-900">Список работ</h2>
-            <span className="text-sm text-gray-500">{pits.length} записей</span>
+            <h2 className="text-xl font-medium text-gray-900">Lista robót</h2>
+            <span className="text-sm text-gray-500">{pits.length} wpisów</span>
           </div>
           <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2">
             {pits.map((pit) => (
@@ -133,7 +133,7 @@ function MapContent() {
                         {pit.year}, {pit.month}
                       </span>
                       <span>•</span>
-                      <span>{pit.files.length} файлов</span>
+                      <span>{pit.files.length} plików</span>
                     </div>
                     <div className="mt-2 flex items-center flex-wrap gap-2">
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
@@ -141,7 +141,7 @@ function MapContent() {
                       </span>
                       {!hasPdfFile(pit.files) && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700">
-                          Нет PDF
+                          Brak PDF
                         </span>
                       )}
                     </div>

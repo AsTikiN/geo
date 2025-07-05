@@ -59,13 +59,13 @@ export function FilesTable({ files, selectedFile, onFileSelect }: FilesTableProp
           <thead>
             <tr className="bg-gray-50">
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                Файл
+                Plik
               </th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                Тип
+                Typ
               </th>
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                Дата
+                Data
               </th>
             </tr>
           </thead>
