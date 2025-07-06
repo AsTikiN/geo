@@ -25,10 +25,10 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                 Adres
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
-                Pliki
+                Ostatnia modyfikacja
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
-                Ostatnia modyfikacja
+                Pliki
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
                 Akcje
@@ -48,17 +48,6 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                     {pit.street.split("_")[0]} {pit.street.split("_")[1]}
                   </div>
                 </td>
-                <td className="px-8 py-6">
-                  <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                      hasPdfFile(pit.files)
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                  >
-                    {pit.files.length}
-                  </span>
-                </td>
                 <td className="px-8 py-6 text-sm text-gray-500">
                   {pit.lastFileModification
                     ? new Date(pit.lastFileModification).toLocaleDateString(
@@ -74,6 +63,17 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                         month: "long",
                         year: "numeric",
                       })}
+                </td>
+                <td className="px-8 py-6">
+                  <span
+                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      hasPdfFile(pit.files)
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-red-100 text-red-800"
+                    }`}
+                  >
+                    {pit.files.length}
+                  </span>
                 </td>
                 <td className="px-8 py-6 space-x-2 flex gap-2 flex-wrap">
                   <Link

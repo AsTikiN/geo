@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-
-const STORAGE_PATH = path.join(process.cwd(), "src", "storage");
+import { getStoragePath } from "./config";
 
 export function getMonthName(month: number): string {
   const months = [
@@ -108,4 +107,4 @@ function getMonthNumber(monthName: string): number {
   return months[monthName as keyof typeof months] || 1;
 }
 
-export const getStoragePath = () => STORAGE_PATH;
+export { getStoragePath };
