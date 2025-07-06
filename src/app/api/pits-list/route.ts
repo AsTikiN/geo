@@ -37,13 +37,13 @@ export async function GET(request: Request) {
     const orderBy = (() => {
       switch (searchParams.get("sort")) {
         case "date_asc":
-          return { createdAt: "asc" as const };
+          return { lastFileModification: "asc" as const };
         case "street_asc":
           return { street: "asc" as const };
         case "street_desc":
           return { street: "desc" as const };
         default:
-          return { createdAt: "desc" as const };
+          return { lastFileModification: "desc" as const };
       }
     })();
     console.log("Order by:", JSON.stringify(orderBy, null, 2));
@@ -58,6 +58,7 @@ export async function GET(request: Request) {
         month: true,
         street: true,
         createdAt: true,
+        lastFileModification: true,
         jobNumber: true,
         files: {
           select: {

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider      = "prisma-client-js"
   output        = "../src/generated/prisma"
@@ -13,25 +10,25 @@ datasource db {
 }
 
 model Pit {
-  id        Int      @id @default(autoincrement())
-  year      Int
-  month     Int
-  street    String
-  files     PitFile[]
-  jobNumber String? @unique @default(uuid())
-  createdAt DateTime @default(now())
+  id                   Int       @id @default(autoincrement())
+  year                 Int
+  month                Int
+  street               String
+  jobNumber            String?   @unique @default(uuid())
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  lastFileModification DateTime?
+  files                PitFile[]
 
   @@unique([year, month, street])
 }
 
 model PitFile {
   id        Int      @id @default(autoincrement())
-  pit       Pit      @relation(fields: [pitId], references: [id])
   pitId     Int
   filename  String
-  filepath  String
+  filepath  String   @unique
   filetype  String
   createdAt DateTime @default(now())
-
-  @@unique([filepath])
+  pit       Pit      @relation(fields: [pitId], references: [id])
 }

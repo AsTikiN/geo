@@ -13,6 +13,7 @@ export interface Pit {
   street: string;
   createdAt: string;
   updatedAt: string;
+  lastFileModification: string | null;
   jobNumber: string;
   files: File[];
 }

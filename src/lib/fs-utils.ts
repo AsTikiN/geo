@@ -53,6 +53,30 @@ export async function walk(dir: string): Promise<string[]> {
   return files;
 }
 
+export async function getFileModificationTime(filePath: string): Promise<Date> {
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.mtime;
+  } catch (error) {
+    console.error(`Error getting modification time for ${filePath}:`, error);
+    return new Date();
+  }
+}
+
+export async function getLatestModificationTime(
+  files: string[]
+): Promise<Date> {
+  if (files.length === 0) {
+    return new Date();
+  }
+
+  const modificationTimes = await Promise.all(
+    files.map((file) => getFileModificationTime(file))
+  );
+
+  return new Date(Math.max(...modificationTimes.map((date) => date.getTime())));
+}
+
 export function parseMeta(filePath: string) {
   const parts = filePath.split(path.sep);
   const len = parts.length;

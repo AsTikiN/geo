@@ -28,7 +28,7 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                 Pliki
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
-                Data
+                Ostatnia modyfikacja
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
                 Akcje
@@ -60,11 +60,20 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                   </span>
                 </td>
                 <td className="px-8 py-6 text-sm text-gray-500">
-                  {new Date(pit.createdAt).toLocaleDateString("pl-PL", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                  {pit.lastFileModification
+                    ? new Date(pit.lastFileModification).toLocaleDateString(
+                        "pl-PL",
+                        {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        }
+                      )
+                    : new Date(pit.createdAt).toLocaleDateString("pl-PL", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                 </td>
                 <td className="px-8 py-6 space-x-2 flex gap-2 flex-wrap">
                   <Link

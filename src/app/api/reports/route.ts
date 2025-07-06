@@ -40,16 +40,18 @@ export async function GET(request: Request) {
       const [city, street] = pit.street.split("_");
       return {
         "№": index + 1,
-        Год: pit.year,
-        Месяц: pit.month,
-        Город: city,
-        Улица: street,
-        "Количество файлов": pit.files.length,
-        "Дата создания": new Date(pit.createdAt).toLocaleDateString("ru-RU"),
-        Файлы: pit.files.map((f) => f.filename).join(", "),
-        "Есть PDF": pit.files.some((f) => f.filetype.toLowerCase() === "pdf")
-          ? "Да"
-          : "Нет",
+        Rok: pit.year,
+        Miesiąc: pit.month,
+        Miasto: city,
+        Ulica: street,
+        "Data modyfikacji": pit.lastFileModification
+          ? new Date(pit.lastFileModification).toLocaleDateString("pl-PL")
+          : new Date(pit.updatedAt).toLocaleDateString("pl-PL"),
+        Mapa: pit.files.some((f) => f.filetype.toLowerCase() === "pdf")
+          ? "Tak"
+          : "Nie",
+        "Liczba plików": pit.files.length,
+        Pliki: pit.files.map((f) => f.filename).join(", "),
       };
     });
 
@@ -60,19 +62,19 @@ export async function GET(request: Request) {
     // Set column widths
     const colWidths = [
       { wch: 4 }, // №
-      { wch: 6 }, // Год
-      { wch: 10 }, // Месяц
-      { wch: 20 }, // Город
-      { wch: 30 }, // Улица
-      { wch: 15 }, // Количество файлов
-      { wch: 15 }, // Дата создания
-      { wch: 50 }, // Файлы
-      { wch: 10 }, // Есть PDF
+      { wch: 6 }, // Rok
+      { wch: 10 }, // Miesiąc
+      { wch: 20 }, // Miasto
+      { wch: 30 }, // Ulica
+      { wch: 15 }, // Data modyfikacji
+      { wch: 8 }, // Mapa
+      { wch: 15 }, // Liczba plików
+      { wch: 50 }, // Pliki
     ];
     ws["!cols"] = colWidths;
 
     // Add worksheet to workbook
-    XLSX.utils.book_append_sheet(wb, ws, "Дорожные работы");
+    XLSX.utils.book_append_sheet(wb, ws, "Prace drogowe");
 
     // Generate buffer
     const excelBuffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });

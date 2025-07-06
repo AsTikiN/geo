@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ReportFilters } from "../services/reportService";
+import { ReportFilters } from "../../types/report";
 import Select from "react-select";
 import { customSelectStyles } from "../../add/components/selectStyles";
 

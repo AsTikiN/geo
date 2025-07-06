@@ -4,6 +4,7 @@ export type Pit = {
   month: number;
   street: string;
   createdAt: string;
+  lastFileModification: string | null;
   files: PitFile[];
 };
 
