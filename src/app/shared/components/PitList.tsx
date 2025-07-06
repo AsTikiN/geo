@@ -2,10 +2,11 @@
 
 import { Table } from "./Table";
 import { Filters } from "./Filters";
+import { Pagination } from "./Pagination";
 import { usePits } from "../hooks/usePits";
 
 export function PitList() {
-  const { data: pits, isLoading, error } = usePits();
+  const { data, isLoading, error } = usePits();
 
   const hasPdfFile = (files: { filetype: string }[]) => {
     return files.some((file) => file.filetype.toLowerCase() === "pdf");
@@ -24,8 +25,16 @@ export function PitList() {
         <div className="text-center py-8">
           <p className="text-red-500">Wystąpił błąd podczas ładowania danych</p>
         </div>
-      ) : pits && pits.length > 0 ? (
-        <Table pits={pits} hasPdfFile={hasPdfFile} />
+      ) : data && data.pits.length > 0 ? (
+        <>
+          <Table pits={data.pits} hasPdfFile={hasPdfFile} />
+          <Pagination
+            currentPage={data.pagination.page}
+            totalPages={data.pagination.totalPages}
+            totalCount={data.pagination.totalCount}
+            limit={data.pagination.limit}
+          />
+        </>
       ) : (
         <div className="text-center py-8">
           <p className="text-gray-500">

@@ -6,6 +6,11 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     console.log("Search params:", Object.fromEntries(searchParams.entries()));
 
+    // Pagination parameters
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const offset = (page - 1) * limit;
+
     const where = {
       ...(searchParams.get("year") && {
         year: parseInt(searchParams.get("year")!),
@@ -38,6 +43,12 @@ export async function GET(request: Request) {
       switch (searchParams.get("sort")) {
         case "date_asc":
           return { lastFileModification: "asc" as const };
+        case "date_desc":
+          return { lastFileModification: "desc" as const };
+        case "modification_asc":
+          return { lastFileModification: "asc" as const };
+        case "modification_desc":
+          return { lastFileModification: "desc" as const };
         case "street_asc":
           return { street: "asc" as const };
         case "street_desc":
@@ -49,9 +60,16 @@ export async function GET(request: Request) {
     console.log("Order by:", JSON.stringify(orderBy, null, 2));
 
     console.log("Executing Prisma query...");
+
+    // Get total count for pagination
+    const totalCount = await prisma.pit.count({ where });
+
+    // Get paginated pits
     const pits = await prisma.pit.findMany({
       where,
       orderBy,
+      skip: offset,
+      take: limit,
       select: {
         id: true,
         year: true,
@@ -73,7 +91,19 @@ export async function GET(request: Request) {
     });
     console.log("Query successful, found", pits.length, "pits");
 
-    return NextResponse.json(pits);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return NextResponse.json({
+      pits,
+      pagination: {
+        page,
+        limit,
+        totalCount,
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (error: unknown) {
     const errorObject = error as Error;
     console.error("Error details:", {

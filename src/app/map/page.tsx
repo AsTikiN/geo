@@ -16,7 +16,7 @@ interface MapRef {
 }
 
 function MapContent() {
-  const { data: pits, isLoading } = usePits();
+  const { data, isLoading } = usePits();
   const mapRef = useRef<MapRef>(null);
 
   const hasPdfFile = (files: { filetype: string }[]) => {
@@ -24,7 +24,7 @@ function MapContent() {
   };
 
   const handlePitClick = (pitId: number) => {
-    if (mapRef.current && pits) {
+    if (mapRef.current && data?.pits) {
       const marker = mapRef.current.markersRef.current.find(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (marker: any) => marker.pitId === pitId
@@ -56,7 +56,7 @@ function MapContent() {
     );
   }
 
-  if (!pits) {
+  if (!data?.pits) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6">
@@ -104,15 +104,17 @@ function MapContent() {
 
       <div className="grid grid-cols-12 gap-8 min-h-[650px]">
         <div className="col-span-8 bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6">
-          <Map ref={mapRef} pits={pits} />
+          <Map ref={mapRef} pits={data.pits} />
         </div>
         <div className="col-span-4 bg-white rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.05)] p-6  ">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-medium text-gray-900">Lista robót</h2>
-            <span className="text-sm text-gray-500">{pits.length} wpisów</span>
+            <span className="text-sm text-gray-500">
+              {data.pits.length} wpisów
+            </span>
           </div>
           <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2">
-            {pits.map((pit) => (
+            {data.pits.map((pit) => (
               <div
                 key={pit.id}
                 onClick={() => handlePitClick(pit.id)}

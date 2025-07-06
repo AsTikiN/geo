@@ -26,6 +26,8 @@ const sortOptions = [
   { value: "", label: "Sortowanie" },
   { value: "date_desc", label: "Najpierw nowe" },
   { value: "date_asc", label: "Najpierw stare" },
+  { value: "modification_desc", label: "Ostatnia modyfikacja (najnowsze)" },
+  { value: "modification_asc", label: "Ostatnia modyfikacja (najstarsze)" },
   { value: "street_asc", label: "Po ulicy (A-Ż)" },
   { value: "street_desc", label: "Po ulicy (Ż-A)" },
 ];
@@ -55,6 +57,8 @@ export function Filters() {
     } else {
       params.delete(key);
     }
+    // Reset to first page when filters change
+    params.set("page", "1");
     router.replace(`/documents?${params.toString()}`, { scroll: false });
   };
 
@@ -65,6 +69,8 @@ export function Filters() {
     } else {
       params.delete("noPdf");
     }
+    // Reset to first page when filters change
+    params.set("page", "1");
     router.replace(`/documents?${params.toString()}`, { scroll: false });
   };
 
@@ -76,6 +82,8 @@ export function Filters() {
       } else {
         params.delete("search");
       }
+      // Reset to first page when search changes
+      params.set("page", "1");
       router.replace(`/documents?${params.toString()}`, { scroll: false });
     }, 300),
     [searchParams, router]
