@@ -141,11 +141,6 @@ export function FilesTable({ files, existingFiles = [] }: FilesTableProps) {
                         <div className="text-sm font-medium text-gray-900">
                           {fileName}
                         </div>
-                        <div className="text-sm text-gray-500">
-                          {new Date(
-                            file.createdAt || Date.now()
-                          ).toLocaleDateString("pl-PL")}
-                        </div>
                       </div>
                     </div>
                   </td>

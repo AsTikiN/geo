@@ -32,7 +32,7 @@ function DocumentsContent() {
         <div className="flex flex-col gap-2">
           <h1 className="text-4xl font-medium text-blue-900 mr-4">Dokumenty</h1>
           <p className="text-gray-500">
-            Zarządzanie dokumentami robót drogowych
+            Zarządzanie dokumentami robót geologicznych
           </p>
         </div>
 

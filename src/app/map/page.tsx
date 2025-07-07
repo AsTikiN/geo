@@ -93,11 +93,9 @@ function MapContent() {
           </Link>
           <div>
             <h1 className="text-4xl font-medium text-blue-900 mb-2">
-              Mapa robót drogowych
+              Mapa robót geologicznych
             </h1>
-            <p className="text-gray-500">
-              Przeglądanie wszystkich miejsc prowadzenia robót drogowych
-            </p>
+            <p className="text-gray-500">Zobacz wszystkie prace geologiczne</p>
           </div>
         </div>
       </div>

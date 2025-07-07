@@ -108,7 +108,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
               onChange={(e) =>
                 setFilters({ ...filters, city: e.target.value || undefined })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400 text-[#1D1D1F]"
               placeholder="Wprowadź miasto"
             />
           </div>
@@ -122,7 +122,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
               onChange={(e) =>
                 setFilters({ ...filters, street: e.target.value || undefined })
               }
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0071E3] focus:border-transparent transition-colors placeholder:text-gray-400 text-[#1D1D1F]"
               placeholder="Wprowadź ulicę"
             />
           </div>
@@ -138,7 +138,7 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
                 setFilters({ ...filters, noPdf: e.target.checked })
               }
             />
-            <span className="text-sm text-gray-700">Tylko wpisy bez PDF</span>
+            <span className="text-sm text-gray-700">Tylko wpisy bez map</span>
           </label>
         </div>
 

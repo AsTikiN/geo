@@ -48,13 +48,37 @@ export default function PreviewPitPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center mb-8">
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center">
+          <Link
+            href="/documents"
+            className="text-[#0071E3] hover:text-[#0077ED] transition-colors"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </Link>
+          <h1 className="text-2xl font-medium text-blue-900 ml-4">
+            Informacje o robotach drogowych
+          </h1>
+        </div>
+
         <Link
-          href="/documents"
-          className="text-[#0071E3] hover:text-[#0077ED] transition-colors"
+          href={`/edit/${params.id}`}
+          className="inline-flex items-center px-4 py-2 bg-[#0071E3] text-white rounded-lg hover:bg-[#0077ED] transition-colors"
         >
           <svg
-            className="w-6 h-6"
+            className="w-4 h-4 mr-2"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -63,13 +87,11 @@ export default function PreviewPitPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
             />
           </svg>
+          Edytuj
         </Link>
-        <h1 className="text-2xl font-medium text-blue-900 ml-4">
-          Informacje o robotach drogowych
-        </h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -97,10 +119,12 @@ export default function PreviewPitPage() {
             <div className="grid grid-cols-2 gap-8">
               <div>
                 <h3 className="text-sm font-medium text-[#86868B] mb-2">
-                  Data utworzenia
+                  Data ostatniej modyfikacji
                 </h3>
                 <p className="text-lg text-[#1D1D1F]">
-                  {new Date(pit.createdAt).toLocaleDateString()}
+                  {pit.lastFileModification
+                    ? new Date(pit.lastFileModification).toLocaleDateString()
+                    : new Date(pit.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>

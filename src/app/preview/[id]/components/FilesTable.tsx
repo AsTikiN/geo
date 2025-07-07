@@ -64,9 +64,6 @@ export function FilesTable({ files, selectedFile, onFileSelect }: FilesTableProp
               <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
                 Typ
               </th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">
-                Data
-              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -89,11 +86,6 @@ export function FilesTable({ files, selectedFile, onFileSelect }: FilesTableProp
                 <td className="px-4 py-3">
                   <span className="text-sm text-gray-500 uppercase">
                     {file.filetype}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <span className="text-sm text-gray-500">
-                    {new Date(file.createdAt).toLocaleDateString()}
                   </span>
                 </td>
               </tr>

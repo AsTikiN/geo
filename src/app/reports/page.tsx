@@ -30,7 +30,11 @@ function ReportsContent() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "road-works-report.xlsx";
+      a.download = `works-report${filters.year ? `-${filters.year}` : ""}${
+        filters.month ? `-${filters.month}` : ""
+      }${filters.city ? `-${filters.city}` : ""}${
+        filters.street ? `-${filters.street}` : ""
+      }${filters.noPdf ? "-no-map" : ""}.xlsx`;
       document.body.appendChild(a);
       a.click();
 
@@ -47,7 +51,9 @@ function ReportsContent() {
     <div>
       <div className="mb-8">
         <h1 className="text-4xl font-medium text-blue-900 mb-2">Raporty</h1>
-        <p className="text-gray-500">Generowanie raportów z robót drogowych</p>
+        <p className="text-gray-500">
+          Generowanie raportów z robót geologicznych
+        </p>
       </div>
 
       <ReportGenerator onGenerate={handleGenerateReport} />
