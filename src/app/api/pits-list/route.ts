@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+const LIMIT = "50";
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -8,7 +10,7 @@ export async function GET(request: Request) {
 
     // Pagination parameters
     const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "10");
+    const limit = parseInt(searchParams.get("limit") || LIMIT);
     const offset = (page - 1) * limit;
 
     const where = {

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { File } from "../types";
 
 interface FilePreviewProps {
@@ -8,7 +9,33 @@ interface FilePreviewProps {
 }
 
 export function FilePreview({ file }: FilePreviewProps) {
-  const fileUrl = `/api/files/${file.filepath}`;
+  const [storagePath, setStoragePath] = useState<string>("");
+  const [fileUrl, setFileUrl] = useState<string>("");
+
+  useEffect(() => {
+    const fetchStoragePath = async () => {
+      try {
+        const response = await fetch("/api/config/storage-path");
+        console.log("response", response);
+        if (response.ok) {
+          const data = await response.json();
+          setStoragePath(data.storagePath);
+          // Use the file path directly since the API handles storage path internally
+          setFileUrl(`/api/files/${encodeURIComponent(file.filepath)}`);
+        }
+      } catch (error) {
+        console.error("Error fetching storage path:", error);
+        // Fallback to original URL if storage path fetch fails
+        setFileUrl(`/api/files/${file.filepath}`);
+      }
+    };
+
+    fetchStoragePath();
+  }, [file.filepath]);
+
+  console.log("file.filepath", file.filepath);
+  console.log("storagePath", storagePath);
+  console.log("fileUrl", fileUrl);
 
   const handleOpenFolder = async () => {
     try {

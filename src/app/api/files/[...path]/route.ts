@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { join } from "path";
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
+import { getStoragePath } from "@/lib/config";
 
 interface Props {
   params: Promise<{ path: string[] }>;
@@ -10,7 +11,8 @@ interface Props {
 export async function GET(request: Request, props: Props) {
   try {
     const { path } = await props.params;
-    const filePath = join(process.cwd(), "src", "storage", ...path);
+    const storagePath = getStoragePath();
+    const filePath = join(storagePath, ...path);
 
     if (!existsSync(filePath)) {
       return NextResponse.json({ error: "File not found" }, { status: 404 });
