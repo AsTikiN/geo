@@ -43,10 +43,10 @@ export async function GET(request: Request) {
 
     const orderBy = (() => {
       switch (searchParams.get("sort")) {
-        case "date_asc":
-          return { lastFileModification: "asc" as const };
-        case "date_desc":
-          return { lastFileModification: "desc" as const };
+        case "year_month_asc":
+          return [{ year: "asc" as const }, { month: "asc" as const }];
+        case "year_month_desc":
+          return [{ year: "desc" as const }, { month: "desc" as const }];
         case "modification_asc":
           return { lastFileModification: "asc" as const };
         case "modification_desc":
@@ -56,7 +56,7 @@ export async function GET(request: Request) {
         case "street_desc":
           return { street: "desc" as const };
         default:
-          return { lastFileModification: "desc" as const };
+          return [{ year: "desc" as const }, { month: "desc" as const }];
       }
     })();
     console.log("Order by:", JSON.stringify(orderBy, null, 2));

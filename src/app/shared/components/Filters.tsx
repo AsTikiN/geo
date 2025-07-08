@@ -24,8 +24,8 @@ const monthOptions = [
 
 const sortOptions = [
   { value: "", label: "Sortowanie" },
-  { value: "date_desc", label: "Najpierw nowe" },
-  { value: "date_asc", label: "Najpierw stare" },
+  { value: "year_month_desc", label: "Najpierw nowe" },
+  { value: "year_month_asc", label: "Najpierw stare" },
   { value: "modification_desc", label: "Ostatnia modyfikacja (najnowsze)" },
   { value: "modification_asc", label: "Ostatnia modyfikacja (najstarsze)" },
   { value: "street_asc", label: "Po ulicy (A-Ż)" },
