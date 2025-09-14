@@ -39,6 +39,7 @@ export default function AddPitPage() {
       formData.append("month", data.month);
       formData.append("city", data.city);
       formData.append("street", data.street);
+      formData.append("author", data.author);
 
       // Add files to formData
       files.forEach((file) => {

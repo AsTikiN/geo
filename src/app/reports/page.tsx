@@ -9,6 +9,7 @@ function ReportsContent() {
     month?: string;
     city?: string;
     street?: string;
+    author?: string;
     noPdf?: boolean;
   }) => {
     try {
@@ -18,6 +19,7 @@ function ReportsContent() {
       if (filters.month) queryParams.append("month", filters.month.toString());
       if (filters.city) queryParams.append("city", filters.city);
       if (filters.street) queryParams.append("street", filters.street);
+      if (filters.author) queryParams.append("author", filters.author);
       if (filters.noPdf) queryParams.append("noPdf", "true");
 
       const response = await fetch(`/api/reports?${queryParams.toString()}`);

@@ -23,6 +23,7 @@ export const useAddPitForm = () => {
       month: "",
       city: "",
       street: "",
+      author: "",
     },
   });
 

@@ -20,6 +20,9 @@ export async function GET(request: Request) {
       ...(searchParams.get("month") && {
         month: parseInt(searchParams.get("month")!),
       }),
+      ...(searchParams.get("author") && {
+        author: searchParams.get("author"),
+      }),
       ...(searchParams.get("search") && {
         OR: [
           { year: parseInt(searchParams.get("search")!) || undefined },
@@ -77,6 +80,7 @@ export async function GET(request: Request) {
         year: true,
         month: true,
         street: true,
+        author: true,
         createdAt: true,
         lastFileModification: true,
         jobNumber: true,

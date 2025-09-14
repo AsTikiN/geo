@@ -111,9 +111,19 @@ export default function PreviewPitPage() {
               </div>
             </div>
 
-            <div>
-              <h3 className="text-sm font-medium text-[#86868B] mb-2">Ulica</h3>
-              <p className="text-lg text-[#1D1D1F]">{pit.street}</p>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-sm font-medium text-[#86868B] mb-2">
+                  Adres
+                </h3>
+                <p className="text-lg text-[#1D1D1F]">{pit.street}</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-[#86868B] mb-2">
+                  Autor
+                </h3>
+                <p className="text-lg text-[#1D1D1F]">{pit.author}</p>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-8">

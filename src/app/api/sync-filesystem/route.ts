@@ -18,11 +18,15 @@ export async function GET() {
     select: { filepath: true, pitId: true },
   });
 
+  let deletedFiles = 0;
+  let deletedPits = 0;
+
   for (const file of existingFiles) {
     if (!allFilePaths.includes(file.filepath)) {
       await prisma.pitFile.delete({
         where: { filepath: file.filepath },
       });
+      deletedFiles++;
 
       // Check if pit has any remaining files
       const remainingFiles = await prisma.pitFile.count({
@@ -33,17 +37,37 @@ export async function GET() {
         await prisma.pit.delete({
           where: { id: file.pitId },
         });
+        deletedPits++;
       }
     }
   }
 
-  // Group files by pit (year, month, street)
+  // Get all existing pits to check if they still have files
+  const existingPits = await prisma.pit.findMany({
+    include: { files: true },
+  });
+
+  // Delete pits that have no files
+  for (const pit of existingPits) {
+    if (pit.files.length === 0) {
+      await prisma.pit.delete({
+        where: { id: pit.id },
+      });
+      deletedPits++;
+    }
+  }
+
+  console.log(
+    `Cleanup completed: ${deletedFiles} files deleted, ${deletedPits} pits deleted`
+  );
+
+  // Group files by pit (year, month, street, author)
   const filesByPit = new Map<string, string[]>();
 
   for (const fullPath of allFiles) {
     const relative = fullPath.replace(base + path.sep, "");
-    const { year, month, street } = parseMeta(relative);
-    const pitKey = `${year}_${month}_${street}`;
+    const { year, month, street, author } = parseMeta(relative);
+    const pitKey = `${year}_${month}_${street}_${author}`;
 
     if (!filesByPit.has(pitKey)) {
       filesByPit.set(pitKey, []);
@@ -53,19 +77,20 @@ export async function GET() {
 
   // Add/update existing files and update pit modification times
   for (const [pitKey, files] of filesByPit) {
-    const [yearStr, monthStr, ...streetParts] = pitKey.split("_");
-    const year = parseInt(yearStr);
-    const month = parseInt(monthStr);
-    const street = streetParts.join("_"); // Preserve the full street name with underscores
+    const parts = pitKey.split("_");
+    const year = parseInt(parts[0]);
+    const month = parseInt(parts[1]);
+    const author = parts[parts.length - 1]; // Author is the last part
+    const street = parts.slice(2, -1).join("_"); // Everything between month and author
 
     // Get the latest modification time for this pit's files
     const latestModTime = await getLatestModificationTime(files);
 
     try {
       const pit = await prisma.pit.upsert({
-        where: { year_month_street: { year, month, street } },
+        where: { author_year_month_street: { author, year, month, street } },
         update: {},
-        create: { year, month, street },
+        create: { year, month, street, author },
       });
 
       // Update the pit's lastFileModification field based on the latest file modification time
@@ -95,5 +120,12 @@ export async function GET() {
     }
   }
 
-  return NextResponse.json({ status: "ok", files: allFiles.length });
+  return NextResponse.json({
+    status: "ok",
+    files: allFiles.length,
+    cleanup: {
+      deletedFiles,
+      deletedPits,
+    },
+  });
 }

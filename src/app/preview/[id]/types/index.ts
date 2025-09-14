@@ -11,6 +11,7 @@ export interface Pit {
   year: string;
   month: string;
   street: string;
+  author: string | null;
   createdAt: string;
   updatedAt: string;
   lastFileModification: string | null;

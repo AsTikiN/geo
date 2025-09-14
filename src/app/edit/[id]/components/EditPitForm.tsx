@@ -107,6 +107,23 @@ export const EditPitForm = ({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
+          Autor
+        </label>
+        <input
+          type="text"
+          placeholder="Nazwa autora"
+          className="w-full px-6 py-4 text-base bg-[#FAFBFC] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors text-[#1D1D1F]"
+          {...register("author")}
+        />
+        {errors.author && (
+          <span className="text-[#FF3B30] text-sm">
+            {errors.author.message}
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
           Dokumenty (opcjonalnie)
         </label>
         <div className="relative">

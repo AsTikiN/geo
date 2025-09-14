@@ -5,6 +5,7 @@ export const addPitSchema = z.object({
   month: z.string().min(1, "Укажите месяц"),
   city: z.string().min(1, "Укажите город"),
   street: z.string().min(1, "Укажите улицу"),
+  author: z.string().min(1, "Укажите автора"),
   files: z.any().optional(),
 });
 

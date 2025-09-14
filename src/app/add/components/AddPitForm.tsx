@@ -83,6 +83,23 @@ export function AddPitForm({
 
       <div className="space-y-3">
         <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
+          Autor
+        </label>
+        <input
+          type="text"
+          placeholder="Nazwa autora"
+          className="w-full px-6 py-4 text-base text-[#1D1D1F] bg-[#F5F7FA] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0071E3] transition-colors placeholder:text-[#1D1D1F]/60"
+          {...register("author", { required: "Wprowadź autora" })}
+        />
+        {errors.author && (
+          <span className="text-[#FF3B30] text-sm">
+            {errors.author.message}
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-3">
+        <label className="block text-sm font-medium text-[#1D1D1F] mb-2">
           Dokumenty
         </label>
         <div className="relative">

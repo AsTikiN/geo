@@ -25,6 +25,9 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                 Adres
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
+                Autor
+              </th>
+              <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
                 Ostatnia modyfikacja
               </th>
               <th className="px-8 py-5 text-left text-sm font-medium text-gray-600">
@@ -47,6 +50,9 @@ export function Table({ pits, hasPdfFile }: TableProps) {
                   <div className="text-sm text-gray-900 font-medium">
                     {pit.street.split("_")[0]} {pit.street.split("_")[1]}
                   </div>
+                </td>
+                <td className="px-8 py-6 text-sm text-gray-900">
+                  {pit.author || "Unknown"}
                 </td>
                 <td className="px-8 py-6 text-sm text-gray-500">
                   {pit.lastFileModification

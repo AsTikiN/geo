@@ -10,12 +10,13 @@ export async function POST(req: NextRequest) {
   const month = parseInt(formData.get("month") as string);
   const city = formData.get("city") as string;
   const street = city + "_" + (formData.get("street") as string);
+  const author = (formData.get("author") as string) || "Unknown"; // Default author if not provided
   const files = formData.getAll("files") as File[];
 
   const pit = await prisma.pit.upsert({
-    where: { year_month_street: { year, month, street } },
+    where: { author_year_month_street: { author, year, month, street } },
     update: {},
-    create: { year, month, street },
+    create: { year, month, street, author },
   });
 
   const monthNames = [
@@ -37,6 +38,7 @@ export async function POST(req: NextRequest) {
 
   const folderPath = path.join(
     getStoragePath(),
+    author,
     yearFolder,
     monthFolder,
     street

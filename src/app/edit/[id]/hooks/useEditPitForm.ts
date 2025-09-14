@@ -41,6 +41,7 @@ export const useEditPitForm = (id: string) => {
       year: "",
       month: "",
       street: "",
+      author: "",
     },
   });
 

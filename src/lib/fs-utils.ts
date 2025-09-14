@@ -82,11 +82,14 @@ export function parseMeta(filePath: string) {
   const filename = parts[len - 1];
   const street = parts[len - 2];
   const monthYear = parts[len - 3].split("_");
+  const year = parts[len - 4].split("_")[0];
+
   const month = getMonthNumber(monthYear[0]);
-  const year = parseInt(monthYear[1]);
+  // const year = parseInt(monthYear[1]);
+  const author = parts[len - 5]; // Author is 5 levels up from filename
   const filetype = path.extname(filename).slice(1);
 
-  return { year, month, street, filename, filetype };
+  return { year, month, street, author, filename, filetype };
 }
 
 function getMonthNumber(monthName: string): number {

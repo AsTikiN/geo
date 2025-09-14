@@ -20,6 +20,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     const month = formData.get("month") as string;
     const city = formData.get("city") as string;
     const street = city + "_" + (formData.get("street") as string);
+    const author = (formData.get("author") as string) || "Unknown";
     const files = formData.getAll("files") as File[];
     const existingFiles = formData.getAll("existingFiles") as string[];
 
@@ -41,15 +42,17 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
       "Grudzień",
     ];
 
-    // Construct paths with _Geotechnika suffix
+    // Construct paths with author and _Geotechnika suffix
     const oldPath = path.join(
       getStoragePath(),
+      pit.author || "Unknown",
       `${pit.year}_Geotechnika`,
       `${monthNames[pit.month - 1]}_${pit.year}`,
       pit.street
     );
     const newPath = path.join(
       getStoragePath(),
+      author,
       `${year}_Geotechnika`,
       `${monthNames[parseInt(month) - 1]}_${year}`,
       street
@@ -173,6 +176,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         year: parseInt(year),
         month: parseInt(month),
         street,
+        author,
       },
     });
 

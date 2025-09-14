@@ -19,8 +19,9 @@ model Pit {
   updatedAt            DateTime  @updatedAt
   lastFileModification DateTime?
   files                PitFile[]
+  author               String?
 
-  @@unique([year, month, street])
+  @@unique([author, year, month, street])
 }
 
 model PitFile {

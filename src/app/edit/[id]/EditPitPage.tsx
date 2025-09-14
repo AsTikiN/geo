@@ -47,6 +47,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
       const [city, street] = pit.street.split("_") || [];
       setValue("city", city || "");
       setValue("street", street || "");
+      setValue("author", pit.author || "");
     }
   }, [pit, setValue]);
 
@@ -69,6 +70,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
     formData.append("month", data.month);
     formData.append("city", data.city);
     formData.append("street", data.street);
+    formData.append("author", data.author);
 
     // Dodaj tylko nowe pliki
     if (data.files) {

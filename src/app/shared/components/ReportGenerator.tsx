@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ReportFilters } from "../../types/report";
 import Select from "react-select";
 import { customSelectStyles } from "../../add/components/selectStyles";
+import { useQuery } from "@tanstack/react-query";
 
 interface ReportGeneratorProps {
   onGenerate: (filters: ReportFilters) => Promise<void>;
@@ -18,10 +19,28 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
   const [filters, setFilters] = useState<ReportFilters>({});
   const [isLoading, setIsLoading] = useState(false);
 
+  // Fetch unique authors
+  const { data: authorsData } = useQuery({
+    queryKey: ["authors"],
+    queryFn: async () => {
+      const response = await fetch("/api/authors");
+      if (!response.ok) throw new Error("Failed to fetch authors");
+      return response.json();
+    },
+  });
+
   const yearOptions: SelectOption[] = Array.from({ length: 100 }, (_, i) => ({
     value: (2000 + i).toString(),
     label: (2000 + i).toString(),
   }));
+
+  const authorOptions: SelectOption[] = [
+    { value: "", label: "Wszyscy autorzy" },
+    ...(authorsData?.authors?.map((author: string) => ({
+      value: author,
+      label: author,
+    })) || []),
+  ];
 
   const monthOptions: SelectOption[] = [
     { value: "1", label: "Styczeń" },
@@ -95,6 +114,26 @@ export function ReportGenerator({ onGenerate }: ReportGeneratorProps) {
               }
               isClearable
               placeholder="Wybierz miesiąc"
+              styles={customSelectStyles}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Autor
+            </label>
+            <Select
+              options={authorOptions}
+              value={authorOptions.find(
+                (option) => option.value === filters.author
+              )}
+              onChange={(option) =>
+                setFilters({
+                  ...filters,
+                  author: option ? option.value : undefined,
+                })
+              }
+              isClearable
+              placeholder="Wybierz autora"
               styles={customSelectStyles}
             />
           </div>

@@ -10,6 +10,7 @@ interface Pit {
   street: string;
   year: string;
   month: string;
+  author: string | null;
   files: any[];
   jobNumber: string;
   createdAt: string;

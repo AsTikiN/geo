@@ -3,5 +3,6 @@ export interface ReportFilters {
   month?: string;
   city?: string;
   street?: string;
+  author?: string;
   noPdf?: boolean;
 }

@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const month = searchParams.get("month");
     const city = searchParams.get("city");
     const street = searchParams.get("street");
+    const author = searchParams.get("author");
     const noPdf = searchParams.get("noPdf") === "true";
 
     // Build the where clause based on filters
@@ -18,6 +19,7 @@ export async function GET(request: Request) {
     if (month) where.month = parseInt(month);
     if (city) where.street = { startsWith: city + "_" };
     if (street) where.street = { contains: "_" + street };
+    if (author) where.author = author;
     if (noPdf) {
       where.files = {
         none: {
@@ -44,6 +46,7 @@ export async function GET(request: Request) {
         Miesiąc: pit.month,
         Miasto: city,
         Ulica: street,
+        Autor: pit.author || "Nieznany",
         "Data modyfikacji": pit.lastFileModification
           ? new Date(pit.lastFileModification).toLocaleDateString("pl-PL")
           : new Date(pit.updatedAt).toLocaleDateString("pl-PL"),
@@ -66,6 +69,7 @@ export async function GET(request: Request) {
       { wch: 10 }, // Miesiąc
       { wch: 20 }, // Miasto
       { wch: 30 }, // Ulica
+      { wch: 15 }, // Autor
       { wch: 15 }, // Data modyfikacji
       { wch: 8 }, // Mapa
       { wch: 15 }, // Liczba plików

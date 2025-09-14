@@ -5,6 +5,7 @@ export const editPitSchema = z.object({
   month: z.string().min(1, "Wybierz miesiąc"),
   city: z.string().min(1, "Wprowadź nazwę miasta"),
   street: z.string().min(1, "Wprowadź nazwę ulicy"),
+  author: z.string().min(1, "Wprowadź nazwę autora"),
   files: z.any().optional(),
 });
 

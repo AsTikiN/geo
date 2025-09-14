@@ -3,6 +3,7 @@ export type Pit = {
   year: number;
   month: number;
   street: string;
+  author: string | null;
   createdAt: string;
   lastFileModification: string | null;
   files: PitFile[];

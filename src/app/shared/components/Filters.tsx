@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState, useEffect } from "react";
 import debounce from "lodash/debounce";
 import { ClientSelect } from "./ClientSelect";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 
 const monthOptions = [
   { value: "", label: "Wszystkie miesiące" },
@@ -45,6 +45,24 @@ export function Filters() {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const [searchValue, setSearchValue] = useState("");
+
+  // Fetch unique authors
+  const { data: authorsData } = useQuery({
+    queryKey: ["authors"],
+    queryFn: async () => {
+      const response = await fetch("/api/authors");
+      if (!response.ok) throw new Error("Failed to fetch authors");
+      return response.json();
+    },
+  });
+
+  const authorOptions = [
+    { value: "", label: "Wszyscy autorzy" },
+    ...(authorsData?.authors?.map((author: string) => ({
+      value: author,
+      label: author,
+    })) || []),
+  ];
 
   useEffect(() => {
     setSearchValue(searchParams.get("search") || "");
@@ -149,6 +167,23 @@ export function Filters() {
             }
             styles={customStyles}
             placeholder="Miesiąc"
+            isClearable
+          />
+        </div>
+
+        <div className="w-48">
+          <ClientSelect
+            options={authorOptions}
+            value={
+              authorOptions.find(
+                (option) => option.value === searchParams.get("author")
+              ) || null
+            }
+            onChange={(option) =>
+              handleFilterChange("author", option?.value || "")
+            }
+            styles={customStyles}
+            placeholder="Autor"
             isClearable
           />
         </div>
