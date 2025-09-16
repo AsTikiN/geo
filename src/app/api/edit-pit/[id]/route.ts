@@ -94,7 +94,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
           }
         }
       } catch (err) {
-        console.error("Ошибка копирования файлов:", err);
+        console.error("Error copying files:", err);
         // Continue even if copy fails - directory might not exist yet
       }
 

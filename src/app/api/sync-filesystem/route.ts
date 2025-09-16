@@ -116,7 +116,7 @@ export async function GET() {
         });
       }
     } catch (err) {
-      console.error("Ошибка при синхронизации файла", pitKey, err);
+      console.error("Error syncing filesystem", pitKey, err);
     }
   }
 

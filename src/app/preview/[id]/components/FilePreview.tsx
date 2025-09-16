@@ -20,12 +20,12 @@ export function FilePreview({ file }: FilePreviewProps) {
         if (response.ok) {
           const data = await response.json();
           setStoragePath(data.storagePath);
-          // Use the file path directly since the API handles storage path internally
+          // Użyj ścieżki pliku bezpośrednio, ponieważ API obsługuje ścieżkę przechowywania wewnętrznie
           setFileUrl(`/api/files/${encodeURIComponent(file.filepath)}`);
         }
       } catch (error) {
-        console.error("Error fetching storage path:", error);
-        // Fallback to original URL if storage path fetch fails
+        console.error("Błąd podczas pobierania ścieżki przechowywania:", error);
+        // Powrót do oryginalnego URL w przypadku niepowodzenia pobierania ścieżki
         setFileUrl(`/api/files/${file.filepath}`);
       }
     };
@@ -43,10 +43,10 @@ export function FilePreview({ file }: FilePreviewProps) {
         `/api/files/open-location?path=${encodeURIComponent(file.filepath)}`
       );
       if (!response.ok) {
-        throw new Error("Failed to open folder");
+        throw new Error("Nie udało się otworzyć folderu");
       }
     } catch (error) {
-      console.error("Error opening folder:", error);
+      console.error("Błąd podczas otwierania folderu:", error);
     }
   };
 
@@ -87,7 +87,7 @@ export function FilePreview({ file }: FilePreviewProps) {
 
   return (
     <div className="flex flex-col items-center justify-center h-full space-y-4">
-      <p className="text-[#86868B]">Предпросмотр недоступен</p>
+      <p className="text-[#86868B]">Podgląd niedostępny</p>
       <div className="flex flex-col items-center gap-4">
         <a
           href={fileUrl}
@@ -95,13 +95,13 @@ export function FilePreview({ file }: FilePreviewProps) {
           rel="noopener noreferrer"
           className="text-blue-500 hover:text-blue-600"
         >
-          Скачать файл
+          Pobierz plik
         </a>
         <button
           onClick={handleOpenFolder}
           className="text-blue-500 hover:text-blue-600 cursor-pointer"
         >
-          Открыть папку с файлом
+          Otwórz folder z plikiem
         </button>
       </div>
     </div>

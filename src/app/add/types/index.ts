@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const addPitSchema = z.object({
-  year: z.string().min(1, "Укажите год"),
-  month: z.string().min(1, "Укажите месяц"),
-  city: z.string().min(1, "Укажите город"),
-  street: z.string().min(1, "Укажите улицу"),
-  author: z.string().min(1, "Укажите автора"),
+  year: z.string().min(1, "Podaj rok"),
+  month: z.string().min(1, "Podaj miesiąc"),
+  city: z.string().min(1, "Podaj miasto"),
+  street: z.string().min(1, "Podaj ulicę"),
+  author: z.string().min(1, "Podaj autora"),
   files: z.any().optional(),
 });
 
