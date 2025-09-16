@@ -12,14 +12,15 @@ echo Current working directory: %CD%
 echo Installing yarn globally...
 npm install -g yarn
 
+
 echo Running yarn install...
 yarn
 
-echo Building the project...
-yarn build
-
 echo Generating Prisma client...
 npx prisma generate
+
+echo Building the project...
+yarn build
 
 echo Setup complete!
 pause 
