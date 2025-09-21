@@ -1,10 +1,11 @@
 "use client";
 
 import { Suspense } from "react";
-import { usePits } from "../shared/hooks/usePits";
 import { Map } from "../shared/modules/Map";
 import Link from "next/link";
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Pit } from "../preview/[id]/types";
 
 interface MapRef {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,8 +16,27 @@ interface MapRef {
   mapInstanceRef: { current: any };
 }
 
+interface MapPitsResponse {
+  pits: Pit[];
+  totalCount: number;
+}
+
+// Custom hook to fetch all pits for the map
+const useMapPits = () => {
+  return useQuery<MapPitsResponse>({
+    queryKey: ["map-pits"],
+    queryFn: async () => {
+      const response = await fetch("/api/map-pits");
+      if (!response.ok) {
+        throw new Error("Failed to fetch map pits");
+      }
+      return response.json();
+    },
+  });
+};
+
 function MapContent() {
-  const { data, isLoading } = usePits();
+  const { data, isLoading } = useMapPits();
   const mapRef = useRef<MapRef>(null);
 
   const hasPdfFile = (files: { filetype: string }[]) => {
@@ -38,11 +58,19 @@ function MapContent() {
         const markerIndex = mapRef.current.markersRef.current.indexOf(marker);
         const infoWindow = mapRef.current.infoWindowsRef.current[markerIndex];
         if (infoWindow) {
+          // Check if this info window is already open
+          const isCurrentlyOpen = infoWindow.getMap() !== null;
+
+          // Close all info windows first
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           mapRef.current.infoWindowsRef.current.forEach((window: any) =>
             window.close()
           );
-          infoWindow.open(mapRef.current.mapInstanceRef.current, marker);
+
+          // If it wasn't open, open it now
+          if (!isCurrentlyOpen) {
+            infoWindow.open(mapRef.current.mapInstanceRef.current, marker);
+          }
         }
       }
     }
