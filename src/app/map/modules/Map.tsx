@@ -43,6 +43,10 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
   const infoWindowsRef = useRef<google.maps.InfoWindow[]>([]);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
 
+  const hasPdfFile = (files: { filetype: string }[]) => {
+    return files.some((file) => file.filetype.toLowerCase() === "pdf");
+  };
+
   useImperativeHandle(ref, () => ({
     markersRef,
     infoWindowsRef,
@@ -164,7 +168,7 @@ const Map = forwardRef<MapRef, MapProps>(({ pits, showPopup = true }, ref) => {
               icon: {
                 path: google.maps.SymbolPath.CIRCLE,
                 scale: 12,
-                fillColor: "#0A84FF",
+                fillColor: hasPdfFile(result.files) ? "#0A84FF" : "#FF3B30", // Blue if PDF exists, red if not
                 fillOpacity: 1,
                 strokeColor: "#FFFFFF",
                 strokeWeight: 2,

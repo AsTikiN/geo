@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   const monthFolder = `${monthNames[month - 1]}_${year}`;
 
   const folderPath = path.join(
-    getStoragePath(),
+    await getStoragePath(),
     author,
     yearFolder,
     monthFolder,
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const filePath = path.join(folderPath, file.name);
-    const relativePath = path.relative(getStoragePath(), filePath);
+    const relativePath = path.relative(await getStoragePath(), filePath);
     const filetype = path.extname(file.name).slice(1);
 
     await writeFile(filePath, buffer);

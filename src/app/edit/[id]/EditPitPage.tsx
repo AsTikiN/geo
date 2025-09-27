@@ -5,7 +5,7 @@ import { useSelectOptions } from "./hooks/useSelectOptions";
 import { EditPitForm } from "./components/EditPitForm";
 import { FilesTable } from "@/app/shared/components/FilesTable";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export interface File {
   id?: string;
@@ -23,6 +23,7 @@ interface EditPitPageProps {
 }
 
 export default function EditPitPage({ id }: EditPitPageProps) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -117,8 +118,8 @@ export default function EditPitPage({ id }: EditPitPageProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center mb-8">
-        <Link
-          href="/documents"
+        <button
+          onClick={() => router.back()}
           className="text-[#0071E3] hover:text-[#0077ED] transition-colors"
         >
           <svg
@@ -134,7 +135,7 @@ export default function EditPitPage({ id }: EditPitPageProps) {
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-        </Link>
+        </button>
         <h1 className="text-2xl font-medium text-blue-900 ml-4">
           Edycja wpisu
         </h1>

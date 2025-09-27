@@ -43,15 +43,16 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     ];
 
     // Construct paths with author and _Geotechnika suffix
+    const storagePath = await getStoragePath();
     const oldPath = path.join(
-      getStoragePath(),
+      storagePath,
       pit.author || "Unknown",
       `${pit.year}_Geotechnika`,
       `${monthNames[pit.month - 1]}_${pit.year}`,
       pit.street
     );
     const newPath = path.join(
-      getStoragePath(),
+      storagePath,
       author,
       `${year}_Geotechnika`,
       `${monthNames[parseInt(month) - 1]}_${year}`,
@@ -114,7 +115,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
       for (const file of filesToDelete) {
         try {
-          const filePath = path.join(getStoragePath(), file.filepath);
+          const filePath = path.join(storagePath, file.filepath);
           await rm(filePath, { force: true });
           await prisma.pitFile.delete({
             where: { id: file.id },
@@ -140,7 +141,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         await prisma.pitFile.create({
           data: {
             filename,
-            filepath: path.relative(getStoragePath(), filepath),
+            filepath: path.relative(storagePath, filepath),
             filetype,
             pitId: id,
           },
@@ -159,7 +160,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
     for (const file of keptFiles) {
       const newRelative = path.relative(
-        getStoragePath(),
+        storagePath,
         path.join(newPath, file.filename)
       );
       console.log("Updating file path:", file.filename, "to", newRelative);

@@ -9,7 +9,7 @@ import path from "path";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
-  const base = getStoragePath();
+  const base = await getStoragePath();
   const allFiles = await walk(base);
   const allFilePaths = allFiles.map((f) => f.replace(base + path.sep, ""));
 

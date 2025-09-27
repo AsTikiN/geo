@@ -20,16 +20,21 @@ export function getMonthName(month: number): string {
   return months[month - 1] || "";
 }
 
-export function getFolderPath(
+export async function getFolderPath(
   year: number,
   month: number,
   street: string
-): string {
+): Promise<string> {
   const yearFolder = `${year}_Geotechnika`;
   const monthFolder = `${getMonthName(month)}_${year}`;
   const streetFolder = street.replace(/\s+/g, "_");
 
-  return path.join(getStoragePath(), yearFolder, monthFolder, streetFolder);
+  return path.join(
+    await getStoragePath(),
+    yearFolder,
+    monthFolder,
+    streetFolder
+  );
 }
 
 export async function walk(dir: string): Promise<string[]> {

@@ -11,7 +11,7 @@ interface Props {
 export async function GET(request: Request, props: Props) {
   try {
     const { path } = await props.params;
-    const storagePath = getStoragePath();
+    const storagePath = await getStoragePath();
     const filePath = join(storagePath, ...path);
 
     if (!existsSync(filePath)) {

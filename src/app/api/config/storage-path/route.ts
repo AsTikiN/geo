@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStoragePath } from "@/lib/config";
+import { prisma } from "@/lib/prisma";
 import fs from "fs/promises";
 
 export async function GET() {
   try {
-    const currentPath = getStoragePath();
-    return NextResponse.json({ 
+    const currentPath = await getStoragePath();
+    return NextResponse.json({
       storagePath: currentPath,
-      isDefault: currentPath.includes("src/storage")
+      isDefault: currentPath.includes("src/storage"),
     });
   } catch (error) {
     console.error("Error getting storage path:", error);
@@ -39,13 +40,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Set environment variable for this session
-    process.env.STORAGE_PATH = storagePath;
+    // Save to database
+    await prisma.config.upsert({
+      where: { key: "storage_path" },
+      update: { value: storagePath },
+      create: { key: "storage_path", value: storagePath },
+    });
 
-    return NextResponse.json({ 
-      success: true, 
+    return NextResponse.json({
+      success: true,
       storagePath,
-      message: "Storage path updated successfully" 
+      message: "Storage path updated successfully",
     });
   } catch (error) {
     console.error("Error setting storage path:", error);

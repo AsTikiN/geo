@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { usePitData } from "./hooks/usePitData";
 import { FilesTable } from "./components/FilesTable";
 import { FilePreview } from "./components/FilePreview";
-import { Map } from "../../shared/modules/Map";
+import { Map } from "../../map/modules/Map";
 import { File } from "./types";
 import Link from "next/link";
 
 export default function PreviewPitPage() {
   const params = useParams();
+  const router = useRouter();
   const { data: pit, isLoading, error } = usePitData(params.id as string);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -50,8 +51,8 @@ export default function PreviewPitPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
-          <Link
-            href="/documents"
+          <button
+            onClick={() => router.back()}
             className="text-[#0071E3] hover:text-[#0077ED] transition-colors"
           >
             <svg
@@ -67,7 +68,7 @@ export default function PreviewPitPage() {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-          </Link>
+          </button>
           <h1 className="text-2xl font-medium text-blue-900 ml-4">
             Informacje o robotach drogowych
           </h1>

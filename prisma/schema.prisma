@@ -33,3 +33,9 @@ model PitFile {
   createdAt DateTime @default(now())
   pit       Pit      @relation(fields: [pitId], references: [id])
 }
+
+model Config {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}

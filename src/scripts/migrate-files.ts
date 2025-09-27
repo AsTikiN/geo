@@ -3,7 +3,7 @@ import path from "path";
 import { getMonthName, getStoragePath } from "../lib/fs-utils";
 
 async function migrateFiles() {
-  const storagePath = getStoragePath();
+  const storagePath = await getStoragePath();
 
   try {
     // Read all files in the storage directory
